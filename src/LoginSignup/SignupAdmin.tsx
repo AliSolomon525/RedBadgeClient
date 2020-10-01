@@ -2,17 +2,27 @@ import React from 'react'
 
 
 export interface SignupAdminProps {
-    name?: any;
-    value?: any;
+    updateToken: any;
 }
  
 export interface SignupAdminState {
     firstName : string,
     lastName: string,
     username : string,
-    passwordHash : string,
+    password : string,
 }
+
+export interface SignupAdminPost {
+   admin: Admin;
+ }
  
+ export interface Admin {
+   firstName: string;
+   lastName: string;
+   username: string;
+   password: string;
+ }
+
 class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
     constructor(props: SignupAdminProps) {
         super(props);
@@ -20,7 +30,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
             firstName : '',
             lastName : '',
             username : '',
-            passwordHash : '',
+            password : '',
     }    
     }
     handleChange = (event : any) => {
@@ -28,9 +38,28 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
         const { value } = event.target;
         console.log(this.state) ;
     }
-    handleSubmit = (event : any) => {
-    //fetch
-    };
+    handleSubmit = (event: any) => {
+      const data: SignupAdminPost = {
+        admin: {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          username: this.state.username,
+          password: this.state.password,
+        },
+      };
+    fetch(Endpoints.authorization.signupAdmin, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data: SignupAdminResponse) => {
+        console.log(data);
+        this.props.updateToken(data.sessionToken);
+      });
+   };
 
     render() {
         return (
@@ -65,3 +94,19 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
 }
  
 export default SignupAdmin;
+
+export interface Username {
+   id: number;
+   firstName: string;
+   lastName: string;
+   username: string;
+   passwordHash: string;
+   updatedAt: Date;
+   createdAt: Date;
+ }
+ export interface SignupAdminResponse {
+   username: Username;
+   message: string;
+   sessionToken: string;
+ }
+ 

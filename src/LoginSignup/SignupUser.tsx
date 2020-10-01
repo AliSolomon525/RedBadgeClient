@@ -52,7 +52,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
       },
     };
 
-    fetch(Endpoints.authorization.signupUser), {
+    fetch(Endpoints.authorization.signupUser, {
       method: "POST",
       body: JSON.stringify(data),
       headers: new Headers({
