@@ -1,105 +1,75 @@
-import React from 'react';
-// import AppBar from '@material-ui/core/AppBar';
-// import { makeStyles, Theme } from '@material-ui/core/styles';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-// import TabPanel from '@material-ui/lab/TabPanel';
+import React from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
+);
 
-// export interface NavProps {
-//   children?: React.ReactNode;
-//   index: any;
-//   value: any;
-//  }
+export interface NavProps {
+  username?: string;
+}
 
-// export interface NavState {
+export interface NavState {
+  target: {
+    username: string;
+    name?: string;
+    value: any;
+  };
+}
 
-
-// }
-
-// function TabPanel(props: NavProps) {
-//   const { children, value, index, ...other } = props;
-
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`simple-tabpanel-${index}`}
-//       aria-labelledby={`simple-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box p={3}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
-
-// function a11yProps(index: any) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }
-
-// const useStyles = makeStyles((theme: Theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     backgroundColor: theme.palette.background.paper,
-//   },
-// }));
-
-// function SimpleTabs() {
-//   const [value, setValue] = React.useState(0);
-
-//   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-//     setValue(newValue);
-//   }
-
-// class Nav extends React.Component<NavState, NavProps> {
-//   constructor(props: NavProps) {
-//     super(props);
-//     //define your state here:
-//     this.state = {
-//       index: 0, 
-//       value: ,
-
-//     };
-    
-//   }
+class Nav extends React.Component<NavProps, NavState> {
+  constructor(props: NavProps) {
+    super(props);
+    this.state({ target: { name: "", value: "" } });
+  }
 
   //create a method for handle change
-  // change the state to the new value
-//   handleChange(e) {
-//     this.setState({})
-//   }
+  //change the state to the new value
+  handleChange = (event: { target: { name: string; value: any } }) => {
+    this.setState({ username: event.target.value });
+  };
 
-//   render() { 
-//     return ( 
-//       <div className="appbar">
-//       <AppBar position="static">
-//         <Tabs value={this.value} onChange={this.handleChange}>
-//           <Tab label="Item One" {...a11yProps(0)}/>
-//           <Tab label="Item Two" {...a11yProps(1)} />
-//           <Tab label="Item Three" {...a11yProps(2)} />
-//         </Tabs>
-//       </AppBar>
-//       <TabPanel value={this.value} index={0}>
-//         Item One
-//       </TabPanel>
-//       <TabPanel value={this.value} index={1}>
-//         Item Two
-//       </TabPanel>
-//       <TabPanel value={this.value} index={2}>
-//         Item Three
-//       </TabPanel>
-//     </div>
-//      );
-//   }
-// };
- 
-// export default Nav;
+  render() {
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6">BookWyrm BookClub</Typography>
+            <Button>Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
+
+export default Nav;
+
+// export interface Username {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   username: string;
+//   passwordHash: string;
+//   updatedAt: Date;
+//   createdAt: Date;
+// }
+// export interface SignupResponse {
+//   username: Username;
+//   message: string;
+//   sessionToken: string;
+// }
