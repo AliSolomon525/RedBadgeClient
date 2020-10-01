@@ -5,9 +5,22 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
+);
 
 export interface NavProps {
-  
+  username?: string;
 }
  
 export interface NavState {
@@ -39,5 +52,3 @@ class Nav extends React.Component<NavProps, NavState> {
 }
  
 export default Nav;
-
-///

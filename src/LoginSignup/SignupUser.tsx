@@ -35,6 +35,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
       password: "",
     };
   }
+
   handleChange = (event: any) => {
     event.preventDefault();
     const { value } = event.target;

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
+import { Endpoints } from "../Components/Endpoints";
 
-
-export interface SignupAdminProps {
+export interface SignupAdminProps 
     updateToken: any;
 }
- 
+
 export interface SignupAdminState {
     firstName : string,
     lastName: string,
@@ -47,6 +47,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
           password: this.state.password,
         },
       };
+      
     fetch(Endpoints.authorization.signupAdmin, {
       method: "POST",
       body: JSON.stringify(data),
@@ -60,37 +61,49 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
         this.props.updateToken(data.sessionToken);
       });
    };
-
-    render() {
-        return (
-          <div className='wrapper'>
-            <div className='form-wrapper'>
-               <h2>Sign Up Admin</h2>
-               <form onSubmit={this.handleSubmit} noValidate >
-                  <div className='fullName'>
-                     <label htmlFor="firstName">First Name: </label>
-                     <input type='text' name='firstName' onChange={this.handleChange}/>
-                  </div>
-                  <div className='lastName'>
-                     <label htmlFor="lastName">Last Name: </label>
-                     <input type='text' name='lastName' onChange={this.handleChange}/>
-                  </div>
-                  <div className='username'>
-                     <label htmlFor="username">Email: </label>
-                     <input type='email' name='username' onChange={this.handleChange}/>
-                  </div>
-                  <div className='password'>
-                     <label htmlFor="password">Password: </label>
-                     <input type='password' name='password' onChange={this.handleChange}/>
-                  </div>              
-                  <div className='submit'>
-                     <button>Register Me</button>
-                  </div>
-             </form>
-         </div>
+ 
+  render() {
+    return (
+      <div className="wrapper">
+        <div className="form-wrapper">
+          <h2>Sign Up Admin</h2>
+          <form onSubmit={this.handleSubmit} noValidate>
+            <div className="fullName">
+              <label htmlFor="firstName">First Name: </label>
+              <input
+                type="text"
+                name="firstName"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="lastName">
+              <label htmlFor="lastName">Last Name: </label>
+              <input type="text" name="lastName" onChange={this.handleChange} />
+            </div>
+            <div className="username">
+              <label htmlFor="username">Email: </label>
+              <input
+                type="email"
+                name="username"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="password">
+              <label htmlFor="password">Password: </label>
+              <input
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="submit">
+              <button>Register Me</button>
+            </div>
+          </form>
+        </div>
       </div>
-     );
-    }
+    );
+  }
 }
  
 export default SignupAdmin;
