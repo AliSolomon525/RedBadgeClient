@@ -1,53 +1,53 @@
 import React from "react";
 import { Endpoints } from "../Components/Endpoints";
 
-export interface SignupAdminProps 
-    updateToken: any;
+export interface SignupAdminProps {
+  updateToken: any;
 }
 
 export interface SignupAdminState {
-    firstName : string,
-    lastName: string,
-    username : string,
-    password : string,
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
 }
 
 export interface SignupAdminPost {
-   admin: Admin;
- }
- 
- export interface Admin {
-   firstName: string;
-   lastName: string;
-   username: string;
-   password: string;
- }
+  admin: Admin;
+}
+
+export interface Admin {
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+}
 
 class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
-    constructor(props: SignupAdminProps) {
-        super(props);
-        this.state = {
-            firstName : '',
-            lastName : '',
-            username : '',
-            password : '',
-    }    
-    }
-    handleChange = (event : any) => {
-        event.preventDefault();
-        const { value } = event.target;
-        console.log(this.state) ;
-    }
-    handleSubmit = (event: any) => {
-      const data: SignupAdminPost = {
-        admin: {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          username: this.state.username,
-          password: this.state.password,
-        },
-      };
-      
+  constructor(props: SignupAdminProps) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+    };
+  }
+  handleChange = (event: any) => {
+    event.preventDefault();
+    const { value } = event.target;
+    console.log(this.state);
+  };
+  handleSubmit = (event: any) => {
+    const data: SignupAdminPost = {
+      admin: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        username: this.state.username,
+        password: this.state.password,
+      },
+    };
+
     fetch(Endpoints.authorization.signupAdmin, {
       method: "POST",
       body: JSON.stringify(data),
@@ -60,8 +60,8 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
         console.log(data);
         this.props.updateToken(data.sessionToken);
       });
-   };
- 
+  };
+
   render() {
     return (
       <div className="wrapper">
@@ -105,21 +105,20 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
     );
   }
 }
- 
+
 export default SignupAdmin;
 
 export interface Username {
-   id: number;
-   firstName: string;
-   lastName: string;
-   username: string;
-   passwordHash: string;
-   updatedAt: Date;
-   createdAt: Date;
- }
- export interface SignupAdminResponse {
-   username: Username;
-   message: string;
-   sessionToken: string;
- }
- 
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  passwordHash: string;
+  updatedAt: Date;
+  createdAt: Date;
+}
+export interface SignupAdminResponse {
+  username: Username;
+  message: string;
+  sessionToken: string;
+}

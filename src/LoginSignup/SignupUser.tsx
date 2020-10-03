@@ -44,6 +44,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
   };
 
   handleSubmit = (event: any) => {
+    event.preventDefault();
     const data: SignupPost = {
       user: {
         firstName: this.state.firstName,
