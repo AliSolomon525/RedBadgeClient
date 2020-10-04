@@ -1,5 +1,33 @@
-.carousel {
-  list-style: none;
-  text-decoration: none;
+.App {
+  background-color: #fff1e6;
+  /* background-image: url(./assets/banner2.png); */
+  /* background-size: cover;
+  width: 100%;
+  height: auto; */
+}
+
+.navbar {
+  background-color: #a5a58d;
+}
+
+.wrapper {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+}
+
+.form-wrapper {
+  align-items: center;
+  display: center;
+}
+
+.container {
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.submit {
   text-align: center;
 }

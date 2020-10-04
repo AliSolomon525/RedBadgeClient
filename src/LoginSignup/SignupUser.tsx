@@ -1,5 +1,7 @@
 import React from "react";
 import { Endpoints } from "../Components/Endpoints";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 export interface SignupUserProps {
   // name?: any;
@@ -72,38 +74,55 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2>Sign Up User</h2>
+          <h2 style={{ textAlign: "center" }}>Sign Up User</h2>
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="firstName">
-              <label htmlFor="firstName">First Name: </label>
-              <input
+              <TextField
+                id="outlined-required"
+                label="First Name"
                 type="text"
+                size="small"
                 name="firstName"
+                variant="outlined"
                 onChange={this.handleChange}
               />
             </div>
             <div className="lastName">
-              <label htmlFor="lastName">Last Name: </label>
-              <input type="text" name="lastName" onChange={this.handleChange} />
+              <TextField
+                id="outlined-required"
+                label="Last Name"
+                type="text"
+                size="small"
+                name="firstName"
+                variant="outlined"
+                onChange={this.handleChange}
+              />
             </div>
             <div className="username">
-              <label htmlFor="username">Email: </label>
-              <input
-                type="email"
-                name="username"
+              <TextField
+                id="outlined-required"
+                label="Email"
+                type="text"
+                size="small"
+                name="firstName"
+                variant="outlined"
                 onChange={this.handleChange}
               />
             </div>
             <div className="password">
-              <label htmlFor="password">Password: </label>
-              <input
-                type="password"
-                name="password"
+              <TextField
+                id="outlined-required"
+                label="Password"
+                type="text"
+                size="small"
+                name="firstName"
+                variant="outlined"
                 onChange={this.handleChange}
               />
             </div>
             <div className="submit">
-              <button>Register Me</button>
+              <br />
+              <Button variant="outlined">Register Me</Button>
             </div>
           </form>
         </div>

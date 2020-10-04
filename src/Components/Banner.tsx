@@ -1,0 +1,25 @@
+import React, { Component } from "react";
+import banner from "../assets/banner.png";
+import banner2 from "../assets/banner2.png";
+
+export interface BannerProps {}
+
+export interface BannerState {
+  bannerInfo: any;
+}
+
+class Banner extends React.Component<BannerProps, BannerState> {
+  constructor(props: BannerProps) {
+    super(props);
+    this.state = { bannerInfo: [] };
+  }
+  render() {
+    return (
+      <div>
+        <img src={banner2} alt="book" style={{ width: "100%" }} />
+      </div>
+    );
+  }
+}
+
+export default Banner;

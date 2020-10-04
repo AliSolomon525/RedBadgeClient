@@ -1,5 +1,6 @@
 import React from "react";
 import { Endpoints } from "../Components/Endpoints";
+import Button from "@material-ui/core/Button";
 
 export interface SignupAdminProps {
   updateToken: any;
@@ -66,7 +67,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2>Sign Up Admin</h2>
+          <h2 style={{ textAlign: "center" }}>Sign Up Admin</h2>
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="fullName">
               <label htmlFor="firstName">First Name: </label>
@@ -97,7 +98,8 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
               />
             </div>
             <div className="submit">
-              <button>Register Me</button>
+              <br />
+              <Button variant="outlined">Register Me</Button>
             </div>
           </form>
         </div>
