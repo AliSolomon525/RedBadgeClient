@@ -1,9 +1,9 @@
 import React from "react";
 import { Endpoints } from "../Components/Endpoints";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 export interface LoginAdminProps {
-  // name?: any;
-  // value?: any;
   updateToken: any;
 }
 
@@ -70,38 +70,33 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2>Login Admin</h2>
           <form onSubmit={this.handleSubmit} noValidate>
-            <div className="firstName">
-              <label htmlFor="firstName">First Name: </label>
-              <input
+            <div className="names">
+              <TextField
+                id="outlined-required"
+                label="Email (Admin)"
                 type="text"
-                name="firstName"
-                onChange={this.handleChange}
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ username: e.target.value })}
               />
-            </div>
-            <div className="lastName">
-              <label htmlFor="lastName">Last Name: </label>
-              <input type="text" name="lastName" onChange={this.handleChange} />
-            </div>
-            <div className="username">
-              <label htmlFor="username">Email: </label>
-              <input
-                type="email"
-                name="username"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="password">
-              <label htmlFor="password">Password: </label>
-              <input
-                type="password"
-                name="password"
-                onChange={this.handleChange}
+              <TextField
+                id="outlined-required"
+                label="Password (Admin)"
+                type="text"
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ password: e.target.value })}
               />
             </div>
             <div className="submit">
-              <button>Register Me</button>
+              <Button
+                variant="outlined"
+                type="submit"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Admin Login
+              </Button>
             </div>
           </form>
         </div>

@@ -103,7 +103,6 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
               />
             </div>
             <div className="submit">
-              <br />
               <Button
                 variant="outlined"
                 type="submit"

@@ -32,30 +32,32 @@
   display: center;
 }
 
-.vl {
-  border-left: solid 2px gray;
-}
-
 .names {
   padding-left: 2px;
-  padding: 4px;
+  padding: 2px;
+  padding-bottom: 10px;
 }
 
 .container {
   padding: 1em;
   display: flex;
   flex-wrap: wrap;
+  border-bottom: double 2px #a5a58d;
 }
 
 .submit {
   text-align: center;
 }
 
-.bannerLine {
-  color: gray;
-  border-top: dotted;
+.container2 {
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffe8d6;
+  border-bottom: solid 1px darkgray;
 }
 
-.login {
-  background-color: #ffe8d6;
+.bannerLine {
+  color: gray;
+  border-top: double;
 }
