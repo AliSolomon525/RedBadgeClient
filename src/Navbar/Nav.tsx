@@ -10,6 +10,7 @@ const useStyles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
     color: "A5A58D",
+    minHeight: 10,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -36,8 +37,6 @@ export interface NavProps {
 
 export interface NavState {
   username: string;
-  // open?: any;
-  // setOpen?: any;
 }
 
 class Nav extends React.Component<NavProps, NavState> {
@@ -61,8 +60,13 @@ class Nav extends React.Component<NavProps, NavState> {
   render() {
     const { classes }: any = this.props;
     return (
-      <div style={{ display: "flex" }}>
-        <AppBar position="static" style={{ backgroundColor: "#a5a58d" }}>
+      <div style={{ paddingTop: 56, paddingBottom: 10 }}>
+        <AppBar
+          style={{
+            backgroundColor: "#a5a58d",
+            position: "fixed",
+          }}
+        >
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               BookWyrm BookClub

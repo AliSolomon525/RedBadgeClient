@@ -50,9 +50,9 @@ function App() {
         <SignupAdmin updateToken={updateToken} />
         <SignupUser updateToken={updateToken} />
       </div>
-      <div className="login">
-        <LoginUser updateToken={updateToken} />
+      <div className="container2">
         <LoginAdmin updateToken={updateToken} />
+        <LoginUser updateToken={updateToken} />
       </div>
       <Banner />
     </div>

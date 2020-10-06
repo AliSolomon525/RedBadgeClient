@@ -16,7 +16,7 @@ class Banner extends React.Component<BannerProps, BannerState> {
   render() {
     return (
       <div>
-        <hr className="bannerLine" />
+        {/* <hr className="bannerLine" /> */}
         <img src={banner2} alt="book" style={{ width: "100%" }} />
       </div>
     );

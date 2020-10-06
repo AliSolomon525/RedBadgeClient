@@ -109,7 +109,6 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
               />
             </div>
             <div className="submit">
-              <br />
               <Button
                 variant="outlined"
                 type="submit"
