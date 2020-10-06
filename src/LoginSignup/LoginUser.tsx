@@ -70,7 +70,7 @@ class LoginUser extends React.Component<LoginUserProps, LoginUserState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2>Sign Up User</h2>
+          <h2>Login User</h2>
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="firstName">
               <label htmlFor="firstName">First Name: </label>

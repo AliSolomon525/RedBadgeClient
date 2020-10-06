@@ -1,13 +1,23 @@
 .App {
-  background-color: #fff1e6;
-  /* background-image: url(./assets/banner2.png); */
-  /* background-size: cover;
+  background-color: #ddbea9;
+  /* background-image: url(./assets/banner2.png);
+  background-size: cover;
   width: 100%;
   height: auto; */
 }
 
+.h2 {
+  text-transform: uppercase;
+}
+
 .navbar {
   background-color: #a5a58d;
+}
+
+.logout {
+  display: flex;
+  flex-wrap: flex-end;
+  text-align: right;
 }
 
 .wrapper {
@@ -22,6 +32,15 @@
   display: center;
 }
 
+.vl {
+  border-left: solid 2px gray;
+}
+
+.names {
+  padding-left: 2px;
+  padding: 4px;
+}
+
 .container {
   padding: 1em;
   display: flex;
@@ -30,4 +49,13 @@
 
 .submit {
   text-align: center;
+}
+
+.bannerLine {
+  color: gray;
+  border-top: dotted;
+}
+
+.login {
+  background-color: #ffe8d6;
 }

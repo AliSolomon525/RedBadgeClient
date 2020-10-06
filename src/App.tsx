@@ -7,6 +7,8 @@ import Nav from "./Navbar/Nav";
 import SignupAdmin from "./LoginSignup/SignupAdmin";
 import SignupUser from "./LoginSignup/SignupUser";
 import Banner from "./Components/Banner";
+import LoginUser from "./LoginSignup/LoginUser";
+import LoginAdmin from "./LoginSignup/LoginAdmin";
 
 //needs a function to check to see if there is a token forom local storage
 //this functional component needs usestates
@@ -47,6 +49,10 @@ function App() {
       <div className="container">
         <SignupAdmin updateToken={updateToken} />
         <SignupUser updateToken={updateToken} />
+      </div>
+      <div className="login">
+        <LoginUser updateToken={updateToken} />
+        <LoginAdmin updateToken={updateToken} />
       </div>
       <Banner />
     </div>

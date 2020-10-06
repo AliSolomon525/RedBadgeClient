@@ -4,23 +4,10 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 export interface SignupUserProps {
-  // name?: any;
-  // value?: any;
   updateToken: any;
 }
 
 export interface SignupUserState {
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-}
-
-export interface SignupPost {
-  user: User;
-}
-
-export interface User {
   firstName: string;
   lastName: string;
   username: string;
@@ -46,13 +33,13 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
   };
 
   handleSubmit = (event: any) => {
-    event.preventDefault();
+    // event.preventDefault();
     const data: SignupPost = {
       user: {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
-        password: this.state.password,
+        passwordHash: this.state.password,
       },
     };
 
@@ -67,6 +54,12 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
       .then((data: SignupResponse) => {
         console.log(data);
         this.props.updateToken(data.sessionToken);
+        this.setState({
+          firstName: "",
+          lastName: "",
+          username: "",
+          password: "",
+        });
       });
   };
 
@@ -74,55 +67,50 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2 style={{ textAlign: "center" }}>Sign Up User</h2>
+          {/* <h2 style={{ textAlign: "center" }}>Sign Up User</h2> */}
           <form onSubmit={this.handleSubmit} noValidate>
-            <div className="firstName">
+            <div className="names">
               <TextField
                 id="outlined-required"
-                label="First Name"
-                type="text"
+                label="First Name (User)"
                 size="small"
-                name="firstName"
                 variant="outlined"
-                onChange={this.handleChange}
+                onChange={(e) => this.setState({ firstName: e.target.value })}
+              />
+              <TextField
+                id="outlined-required"
+                label="Last Name (User)"
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ lastName: e.target.value })}
               />
             </div>
-            <div className="lastName">
+
+            <div className="names">
               <TextField
                 id="outlined-required"
-                label="Last Name"
-                type="text"
+                label="Email (User)"
                 size="small"
-                name="firstName"
                 variant="outlined"
-                onChange={this.handleChange}
+                onChange={(e) => this.setState({ username: e.target.value })}
               />
-            </div>
-            <div className="username">
               <TextField
                 id="outlined-required"
-                label="Email"
-                type="text"
+                label="Password (User)"
                 size="small"
-                name="firstName"
                 variant="outlined"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="password">
-              <TextField
-                id="outlined-required"
-                label="Password"
-                type="text"
-                size="small"
-                name="firstName"
-                variant="outlined"
-                onChange={this.handleChange}
+                onChange={(e) => this.setState({ password: e.target.value })}
               />
             </div>
             <div className="submit">
               <br />
-              <Button variant="outlined">Register Me</Button>
+              <Button
+                variant="outlined"
+                type="submit"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                User Sign Up
+              </Button>
             </div>
           </form>
         </div>
@@ -146,4 +134,15 @@ export interface SignupResponse {
   username: Username;
   message: string;
   sessionToken: string;
+}
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  username: string;
+  passwordHash: string;
+}
+
+export interface SignupPost {
+  user: User;
 }

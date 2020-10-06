@@ -16,6 +16,8 @@ const useStyles = (theme: Theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "#fffdfb",
+    font: "Lucida Sans Unicode",
   },
   color: {
     backgroundColor: "A5A58D",
@@ -28,7 +30,8 @@ export interface NavProps {
   username?: string;
   className?: string;
   color?: any;
-  classes?: string;
+  classes?: any;
+  clickLogout?: any;
 }
 
 export interface NavState {
@@ -56,16 +59,18 @@ class Nav extends React.Component<NavProps, NavState> {
   // };
 
   render() {
-    // const { classes } = this.props;
+    const { classes }: any = this.props;
     return (
       <div style={{ display: "flex" }}>
         <AppBar position="static" style={{ backgroundColor: "#a5a58d" }}>
           <Toolbar>
-            <Typography variant="h6" style={{ color: "black" }}>
+            <Typography variant="h6" className={classes.title}>
               BookWyrm BookClub
             </Typography>
             {/* <Button onClick={this.showSignup}>User: Sign Up</Button> */}
-            <Button style={{ marginRight: "right" }}>Logout</Button>
+            <Button>About Us</Button>
+            <Button>Book Clubs</Button>
+            <Button onClick={this.props.clickLogout}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>
@@ -73,4 +78,4 @@ class Nav extends React.Component<NavProps, NavState> {
   }
 }
 
-export default Nav;
+export default withStyles(useStyles)(Nav);

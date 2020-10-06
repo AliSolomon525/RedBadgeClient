@@ -1,23 +1,13 @@
 import React from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 export interface SignupAdminProps {
   updateToken: any;
 }
 
 export interface SignupAdminState {
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-}
-
-export interface SignupAdminPost {
-  admin: Admin;
-}
-
-export interface Admin {
   firstName: string;
   lastName: string;
   username: string;
@@ -34,18 +24,22 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
       password: "",
     };
   }
+
   handleChange = (event: any) => {
     event.preventDefault();
     const { value } = event.target;
+    this.setState({ username: value });
     console.log(this.state);
   };
+
   handleSubmit = (event: any) => {
+    // event.preventDefault();
     const data: SignupAdminPost = {
       admin: {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
-        password: this.state.password,
+        passwordHash: this.state.password,
       },
     };
 
@@ -60,46 +54,69 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
       .then((data: SignupAdminResponse) => {
         console.log(data);
         this.props.updateToken(data.sessionToken);
+        this.setState({
+          firstName: "",
+          lastName: "",
+          username: "",
+          password: "",
+        });
       });
   };
+
+  //something to think about.... when you have someone log in, do you make them put in their names all over again? or just email & pw?
 
   render() {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h2 style={{ textAlign: "center" }}>Sign Up Admin</h2>
+          {/* <h2 style={{ textAlign: "center" }}>Sign Up Admin</h2> */}
           <form onSubmit={this.handleSubmit} noValidate>
-            <div className="fullName">
-              <label htmlFor="firstName">First Name: </label>
-              <input
+            <div className="names">
+              <TextField
+                id="outlined-required"
+                label="First Name (Admin)"
                 type="text"
-                name="firstName"
-                onChange={this.handleChange}
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ firstName: e.target.value })}
+              />
+              <TextField
+                id="outlined-required"
+                label="Last Name (Admin)"
+                type="text"
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ lastName: e.target.value })}
               />
             </div>
-            <div className="lastName">
-              <label htmlFor="lastName">Last Name: </label>
-              <input type="text" name="lastName" onChange={this.handleChange} />
-            </div>
-            <div className="username">
-              <label htmlFor="username">Email: </label>
-              <input
-                type="email"
-                name="username"
-                onChange={this.handleChange}
+
+            <div className="names">
+              <TextField
+                id="outlined-required"
+                label="Email (Admin)"
+                type="text"
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ username: e.target.value })}
               />
-            </div>
-            <div className="password">
-              <label htmlFor="password">Password: </label>
-              <input
-                type="password"
-                name="password"
-                onChange={this.handleChange}
+              <TextField
+                id="outlined-required"
+                label="Password (Admin)"
+                type="text"
+                size="small"
+                variant="outlined"
+                onChange={(e) => this.setState({ password: e.target.value })}
               />
             </div>
             <div className="submit">
               <br />
-              <Button variant="outlined">Register Me</Button>
+              <Button
+                variant="outlined"
+                type="submit"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Admin Sign Up
+              </Button>
             </div>
           </form>
         </div>
@@ -123,4 +140,15 @@ export interface SignupAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+}
+
+export interface Admin {
+  firstName: string;
+  lastName: string;
+  username: string;
+  passwordHash: string;
+}
+
+export interface SignupAdminPost {
+  admin: Admin;
 }
