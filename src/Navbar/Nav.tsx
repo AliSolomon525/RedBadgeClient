@@ -1,54 +1,81 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
-);
+const useStyles = (theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+    color: "A5A58D",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    color: "#fffdfb",
+    font: "Lucida Sans Unicode",
+  },
+  color: {
+    backgroundColor: "A5A58D",
+  },
+});
+
+// export interface Props extends WithStyles<typeof styles>
 
 export interface NavProps {
   username?: string;
+  className?: string;
+  color?: any;
+  classes?: any;
+  clickLogout?: any;
 }
- 
+
 export interface NavState {
-  username: string
+  username: string;
+  // open?: any;
+  // setOpen?: any;
 }
- 
+
 class Nav extends React.Component<NavProps, NavState> {
   constructor(props: NavProps) {
     super(props);
-    this.state = {username :""  };
+    this.state = { username: "" };
   }
 
-  handleChange = (event: { target: { name: string; value: string; }; }) => {
-    this.setState({username: event.target.value})
-  }
+  handleChange = (event: { target: { name: string; value: string } }) => {
+    this.setState({ username: event.target.value });
+  };
 
-  render() { 
-    return (    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">
-            BookWyrm BookClub
-          </Typography>
-          <Button>Logout</Button>
-        </Toolbar>
-      </AppBar>
-    </div> );
+  // showSignup = () => {
+  //   if (this.state.open) {
+  //     this.state.setOpen(false);
+  //   } else {
+  //     this.state.setOpen(true);
+  //   }
+  // };
+
+  render() {
+    const { classes }: any = this.props;
+    return (
+      <div style={{ display: "flex" }}>
+        <AppBar position="static" style={{ backgroundColor: "#a5a58d" }}>
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              BookWyrm BookClub
+            </Typography>
+            {/* <Button onClick={this.showSignup}>User: Sign Up</Button> */}
+            <Button>About Us</Button>
+            <Button>Book Clubs</Button>
+            <Button onClick={this.props.clickLogout}>Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
   }
 }
- 
-export default Nav;
+
+export default withStyles(useStyles)(Nav);
