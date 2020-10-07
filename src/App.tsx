@@ -2,8 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./App.css";
 import Nav from "./Navbar/Nav";
-//import Auth from "./LoginSignup/Auth.tsx";
-//import HomepageViewOne from "./Components/HomepageViewOne";
+import Auth from "./LoginSignup/Auth";
 import SignupAdmin from "./LoginSignup/SignupAdmin";
 import SignupUser from "./LoginSignup/SignupUser";
 import Banner from "./Components/Banner";
@@ -33,7 +32,7 @@ function App() {
     }
   }, []);
   const updateToken = (newToken: string) => {
-    localStorage.setItem(token, newToken);
+    localStorage.setItem("token", newToken);
     setSessionToken(newToken);
     console.log(sessionToken);
   };
@@ -44,8 +43,8 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
-
+      <Nav clickLogout={clearToken} />
+      <Auth updateToken={updateToken} token={sessionToken} />
       <div className="container">
         <SignupAdmin updateToken={updateToken} />
         <SignupUser updateToken={updateToken} />

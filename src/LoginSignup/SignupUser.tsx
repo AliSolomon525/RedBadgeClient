@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -33,7 +33,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
   };
 
   handleSubmit = (event: any) => {
-    // event.preventDefault();
+    event.preventDefault();
     const data: SignupPost = {
       user: {
         firstName: this.state.firstName,
@@ -63,6 +63,15 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
       });
   };
 
+  showPasswordToggle() {
+    const [isPassword, setisPassword] = useState("password");
+    if (isPassword == "text") {
+      setisPassword("password");
+    } else {
+      setisPassword("text");
+    }
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -76,6 +85,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ firstName: e.target.value })}
+                value={this.state.firstName}
               />
               <TextField
                 id="outlined-required"
@@ -83,6 +93,7 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ lastName: e.target.value })}
+                value={this.state.lastName}
               />
             </div>
 
@@ -90,16 +101,20 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
               <TextField
                 id="outlined-required"
                 label="Email (User)"
+                type="email"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ username: e.target.value })}
+                value={this.state.username}
               />
               <TextField
                 id="outlined-required"
                 label="Password (User)"
                 size="small"
+                type="password"
                 variant="outlined"
                 onChange={(e) => this.setState({ password: e.target.value })}
+                value={this.state.password}
               />
             </div>
             <div className="submit">
