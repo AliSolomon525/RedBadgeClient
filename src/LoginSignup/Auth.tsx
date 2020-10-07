@@ -10,7 +10,7 @@ import LoginUser from "./LoginUser";
 //but needs to carry function that checks the token.
 //
 export interface AuthProps {
-  token: string;
+  token: string | null;
   updateToken: any;
 }
 
@@ -25,12 +25,12 @@ class Auth extends React.Component<AuthProps, AuthState> {
   }
   render() {
     return (
-      <Container>
-        <SignupUser updateToken={this.props.updateToken} />
+      <div>
+        {/* <SignupUser updateToken={this.props.updateToken} />
         <LoginUser updateToken={this.props.updateToken} />
         <SignupAdmin updateToken={this.props.updateToken} />
-        <LoginAdmin updateToken={this.props.updateToken} />
-      </Container>
+        <LoginAdmin updateToken={this.props.updateToken} /> */}
+      </div>
     );
   }
 }

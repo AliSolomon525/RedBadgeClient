@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -8,19 +8,6 @@ export interface LoginAdminProps {
 }
 
 export interface LoginAdminState {
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-}
-
-export interface LoginAdminPost {
-  user: User;
-}
-
-export interface User {
-  firstName: string;
-  lastName: string;
   username: string;
   password: string;
 }
@@ -29,12 +16,11 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
   constructor(props: LoginAdminProps) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
       username: "",
       password: "",
     };
   }
+
   handleChange = (event: any) => {
     event.preventDefault();
     const { value } = event.target;
@@ -43,12 +29,11 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
   };
 
   handleSubmit = (event: any) => {
+    event.preventDefault();
     const data: LoginAdminPost = {
-      user: {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
+      admin: {
         username: this.state.username,
-        password: this.state.password,
+        passwordHash: this.state.password,
       },
     };
 
@@ -60,11 +45,24 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
       }),
     })
       .then((response) => response.json())
-      .then((data: LoginResponse) => {
+      .then((data: LoginAdminResponse) => {
         console.log(data);
         this.props.updateToken(data.sessionToken);
+        this.setState({
+          username: "",
+          password: "",
+        });
       });
   };
+
+  showPasswordToggle() {
+    const [isPassword, setisPassword] = useState("password");
+    if (isPassword == "text") {
+      setisPassword("password");
+    } else {
+      setisPassword("text");
+    }
+  }
 
   render() {
     return (
@@ -75,18 +73,20 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
               <TextField
                 id="outlined-required"
                 label="Email (Admin)"
-                type="text"
+                type="email"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ username: e.target.value })}
+                value={this.state.username}
               />
               <TextField
                 id="outlined-required"
                 label="Password (Admin)"
-                type="text"
+                type="password"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ password: e.target.value })}
+                value={this.state.password}
               />
             </div>
             <div className="submit">
@@ -116,8 +116,17 @@ export interface Username {
   updatedAt: Date;
   createdAt: Date;
 }
-export interface LoginResponse {
+export interface LoginAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+}
+
+export interface Admin {
+  username: string;
+  passwordHash: string;
+}
+
+export interface LoginAdminPost {
+  admin: Admin;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -33,7 +33,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
   };
 
   handleSubmit = (event: any) => {
-    // event.preventDefault();
+    event.preventDefault();
     const data: SignupAdminPost = {
       admin: {
         firstName: this.state.firstName,
@@ -63,14 +63,21 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
       });
   };
 
-  //something to think about.... when you have someone log in, do you make them put in their names all over again? or just email & pw?
+  showPasswordToggle() {
+    const [isPassword, setisPassword] = useState("password");
+    if (isPassword == "text") {
+      setisPassword("password");
+    } else {
+      setisPassword("text");
+    }
+  }
 
   render() {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
           {/* <h2 style={{ textAlign: "center" }}>Sign Up Admin</h2> */}
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={this.handleSubmit}>
             <div className="names">
               <TextField
                 id="outlined-required"
@@ -79,6 +86,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ firstName: e.target.value })}
+                value={this.state.firstName}
               />
               <TextField
                 id="outlined-required"
@@ -87,6 +95,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ lastName: e.target.value })}
+                value={this.state.lastName}
               />
             </div>
 
@@ -94,18 +103,20 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
               <TextField
                 id="outlined-required"
                 label="Email (Admin)"
-                type="text"
+                type="email"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ username: e.target.value })}
+                value={this.state.username}
               />
               <TextField
                 id="outlined-required"
                 label="Password (Admin)"
-                type="text"
+                type="password"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ password: e.target.value })}
+                value={this.state.password}
               />
             </div>
             <div className="submit">
