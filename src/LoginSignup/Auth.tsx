@@ -10,7 +10,7 @@ import LoginUser from "./LoginUser";
 //but needs to carry function that checks the token.
 //
 export interface AuthProps {
-  token: string;
+  token: string | null;
   updateToken: any;
 }
 
