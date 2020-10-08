@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -8,19 +8,6 @@ export interface LoginUserProps {
 }
 
 export interface LoginUserState {
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-}
-
-export interface LoginPost {
-  user: User;
-}
-
-export interface User {
-  firstName: string;
-  lastName: string;
   username: string;
   password: string;
 }
@@ -29,8 +16,6 @@ class LoginUser extends React.Component<LoginUserProps, LoginUserState> {
   constructor(props: LoginUserProps) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
       username: "",
       password: "",
     };
@@ -43,12 +28,11 @@ class LoginUser extends React.Component<LoginUserProps, LoginUserState> {
   };
 
   handleSubmit = (event: any) => {
-    const data: LoginPost = {
+    event.preventDefault();
+    const data: LoginUserPost = {
       user: {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
         username: this.state.username,
-        password: this.state.password,
+        passwordHash: this.state.password,
       },
     };
 
@@ -63,29 +47,45 @@ class LoginUser extends React.Component<LoginUserProps, LoginUserState> {
       .then((data: LoginResponse) => {
         console.log(data);
         this.props.updateToken(data.sessionToken);
+        this.setState({
+          username: "",
+          password: "",
+        });
       });
   };
+
+  showPasswordToggle() {
+    const [isPassword, setisPassword] = useState("password");
+    if (isPassword == "text") {
+      setisPassword("password");
+    } else {
+      setisPassword("text");
+    }
+  }
 
   render() {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          {/* <h2>Login User</h2> */}
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="names">
               <TextField
                 id="outlined-required"
+                type="email"
                 label="Email (User)"
                 size="small"
                 variant="outlined"
                 onChange={(e) => this.setState({ username: e.target.value })}
+                value={this.state.username}
               />
               <TextField
                 id="outlined-required"
                 label="Password (User)"
                 size="small"
+                type="password"
                 variant="outlined"
                 onChange={(e) => this.setState({ password: e.target.value })}
+                value={this.state.password}
               />
             </div>
             <div className="submit">
@@ -119,4 +119,13 @@ export interface LoginResponse {
   username: Username;
   message: string;
   sessionToken: string;
+}
+
+export interface User {
+  username: string;
+  passwordHash: string;
+}
+
+export interface LoginUserPost {
+  user: User;
 }
