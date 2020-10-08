@@ -1,3 +1,5 @@
+//BookList Edit Modal will only display if the 
+//user would like to edit the details of a workout
 import * as React from "react";
 
 // export interface BookListEditProps {

@@ -8,19 +8,7 @@ import SignupUser from "./LoginSignup/SignupUser";
 import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
-
-//needs a function to check to see if there is a token forom local storage
-//this functional component needs usestates
-// interface UserInfo {
-//   userName: string;
-//   password: string;
-// }
-
-// export interface newToken {
-//   newToken: any;
-// }
-
-//build an interface to handle settoken
+import BookListIndex from "./BookLists/BookListIndex";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
@@ -41,10 +29,20 @@ function App() {
     setSessionToken("");
   };
 
+  const protectedViews = () => {
+    return sessionToken === localStorage.getItem("token") ? (
+      <BookListIndex token={sessionToken} />
+    ) : (
+      <Auth token={sessionToken} updateToken={updateToken} />
+    );
+  };
+
   return (
     <div className="App">
-      <Nav clickLogout={clearToken} />
-      <Auth updateToken={updateToken} token={sessionToken} />
+
+      <Nav />
+      <Auth token={sessionToken} updateToken={updateToken} />
+
       <div className="container">
         <SignupAdmin updateToken={updateToken} />
         <SignupUser updateToken={updateToken} />
@@ -53,6 +51,7 @@ function App() {
         <LoginAdmin updateToken={updateToken} />
         <LoginUser updateToken={updateToken} />
       </div>
+      {protectedViews()}
       <Banner />
     </div>
   );
