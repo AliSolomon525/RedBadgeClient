@@ -1,85 +1,105 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+// import AppBar from '@material-ui/core/AppBar';
+// import { makeStyles, Theme } from '@material-ui/core/styles';
+// import Tabs from '@material-ui/core/Tabs';
+// import Tab from '@material-ui/core/Tab';
+// import Typography from '@material-ui/core/Typography';
+// import Box from '@material-ui/core/Box';
+// import TabPanel from '@material-ui/lab/TabPanel';
 
-const useStyles = (theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    color: "A5A58D",
-    minHeight: 10,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    color: "#fffdfb",
-    font: "Lucida Sans Unicode",
-  },
-  color: {
-    backgroundColor: "A5A58D",
-  },
-});
 
-// export interface Props extends WithStyles<typeof styles>
+// export interface NavProps {
+//   children?: React.ReactNode;
+//   index: any;
+//   value: any;
+//  }
 
-export interface NavProps {
-  username?: string;
-  className?: string;
-  color?: any;
-  classes?: any;
-  clickLogout?: any;
-}
+// export interface NavState {
 
-export interface NavState {
-  username: string;
-}
 
-class Nav extends React.Component<NavProps, NavState> {
-  constructor(props: NavProps) {
-    super(props);
-    this.state = { username: "" };
-  }
+// }
 
-  handleChange = (event: { target: { name: string; value: string } }) => {
-    this.setState({ username: event.target.value });
-  };
+// function TabPanel(props: NavProps) {
+//   const { children, value, index, ...other } = props;
 
-  // showSignup = () => {
-  //   if (this.state.open) {
-  //     this.state.setOpen(false);
-  //   } else {
-  //     this.state.setOpen(true);
-  //   }
-  // };
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box p={3}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
-  render() {
-    const { classes }: any = this.props;
-    return (
-      <div style={{ paddingTop: 56, paddingBottom: 10 }}>
-        <AppBar
-          style={{
-            backgroundColor: "#a5a58d",
-            position: "fixed",
-          }}
-        >
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              BookWyrm BookClub
-            </Typography>
-            {/* <Button onClick={this.showSignup}>User: Sign Up</Button> */}
-            <Button>About Us</Button>
-            <Button>Book Clubs</Button>
-            <Button onClick={this.props.clickLogout}>Logout</Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
-}
+// function a11yProps(index: any) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     'aria-controls': `simple-tabpanel-${index}`,
+//   };
+// }
 
-export default withStyles(useStyles)(Nav);
+// const useStyles = makeStyles((theme: Theme) => ({
+//   root: {
+//     flexGrow: 1,
+//     backgroundColor: theme.palette.background.paper,
+//   },
+// }));
+
+// function SimpleTabs() {
+//   const [value, setValue] = React.useState(0);
+
+//   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+//     setValue(newValue);
+//   }
+
+// class Nav extends React.Component<NavState, NavProps> {
+//   constructor(props: NavProps) {
+//     super(props);
+//     //define your state here:
+//     this.state = {
+//       index: 0, 
+//       value: ,
+
+//     };
+    
+//   }
+
+  //create a method for handle change
+  // change the state to the new value
+//   handleChange(e) {
+//     this.setState({})
+//   }
+
+//   render() { 
+//     return ( 
+//       <div className="appbar">
+//       <AppBar position="static">
+//         <Tabs value={this.value} onChange={this.handleChange}>
+//           <Tab label="Item One" {...a11yProps(0)}/>
+//           <Tab label="Item Two" {...a11yProps(1)} />
+//           <Tab label="Item Three" {...a11yProps(2)} />
+//         </Tabs>
+//       </AppBar>
+//       <TabPanel value={this.value} index={0}>
+//         Item One
+//       </TabPanel>
+//       <TabPanel value={this.value} index={1}>
+//         Item Two
+//       </TabPanel>
+//       <TabPanel value={this.value} index={2}>
+//         Item Three
+//       </TabPanel>
+//     </div>
+//      );
+//   }
+// };
+ 
+// export default Nav;
