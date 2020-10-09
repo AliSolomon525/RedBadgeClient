@@ -41,7 +41,7 @@ function App() {
     <div className="App">
 
       <Nav />
-      <Auth token={sessionToken} updateToken={updateToken} />
+      {/* <Auth token={sessionToken} updateToken={updateToken} />
 
       <div className="container">
         <SignupAdmin updateToken={updateToken} />
@@ -50,9 +50,9 @@ function App() {
       <div className="container2">
         <LoginAdmin updateToken={updateToken} />
         <LoginUser updateToken={updateToken} />
-      </div>
+      </div> */}
       {protectedViews()}
-      <Banner />
+      <Banner/>
     </div>
   );
 }
