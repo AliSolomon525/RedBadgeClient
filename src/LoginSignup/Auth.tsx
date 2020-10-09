@@ -26,10 +26,14 @@ class Auth extends React.Component<AuthProps, AuthState> {
   render() {
     return (
       <div>
-        {/* <SignupUser updateToken={this.props.updateToken} />
-        <LoginUser updateToken={this.props.updateToken} />
-        <SignupAdmin updateToken={this.props.updateToken} />
-        <LoginAdmin updateToken={this.props.updateToken} /> */}
+        <div className="container">
+          <SignupAdmin updateToken={this.props.updateToken} />
+          <SignupUser updateToken={this.props.updateToken} />
+        </div>
+        <div className="container2">
+          <LoginAdmin updateToken={this.props.updateToken} />
+          <LoginUser updateToken={this.props.updateToken} />
+        </div>
       </div>
     );
   }

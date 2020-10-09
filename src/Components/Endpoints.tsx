@@ -6,7 +6,7 @@ export const Endpoints = {
     signupAdmin: `http://localhost:3000/api/registerAdmin`,
     loginAdmin: `http://localhost:3000/api/loginAdmin`,
     getAdminById: `http://localhost:3000/api/adminInfo/:id`,
-    bookCreate: `http://localhost:3000/book/create`,
+    bookCreate: `http://localhost:3000/api/book/create`,
     bookUpdate: `http://localhost:3000/api/book/updatebook/:id`,
     bookDelete: `http://localhost:3000/api/book/deletebook/:id`,
     getBookById: `http://localhost:3000/api/book/books/:id`,
