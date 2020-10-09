@@ -1,5 +1,63 @@
-.carousel {
-  list-style: none;
-  text-decoration: none;
+.App {
+  background-color: #ddbea9;
+  /* background-image: url(./assets/banner2.png);
+  background-size: cover;
+  width: 100%;
+  height: auto; */
+}
+
+.h2 {
+  text-transform: uppercase;
+}
+
+.navbar {
+  background-color: #a5a58d;
+}
+
+.logout {
+  display: flex;
+  flex-wrap: flex-end;
+  text-align: right;
+}
+
+.wrapper {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 50%;
+  align-items: center;
   text-align: center;
+}
+
+.form-wrapper {
+  align-items: center;
+  display: center;
+}
+
+.names {
+  padding-left: 2px;
+  padding: 2px;
+  padding-bottom: 10px;
+}
+
+.container {
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: double 2px #a5a58d;
+}
+
+.submit {
+  text-align: center;
+}
+
+.container2 {
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffe8d6;
+  border-bottom: solid 1px darkgray;
+}
+
+.bannerLine {
+  color: gray;
+  border-top: double;
 }
