@@ -33,26 +33,19 @@ function App() {
     return sessionToken === localStorage.getItem("token") ? (
       <BookListIndex token={sessionToken} />
     ) : (
-      <Auth token={sessionToken} updateToken={updateToken} />
+      <div>
+        <Auth token={sessionToken} updateToken={updateToken} />
+        <Banner />
+      </div>
     );
   };
 
   return (
     <div className="App">
-
-      <Nav />
-      <Auth token={sessionToken} updateToken={updateToken} />
-
-      <div className="container">
-        <SignupAdmin updateToken={updateToken} />
-        <SignupUser updateToken={updateToken} />
-      </div>
-      <div className="container2">
-        <LoginAdmin updateToken={updateToken} />
-        <LoginUser updateToken={updateToken} />
+      <div>
+        <Nav />
       </div>
       {protectedViews()}
-      <Banner />
     </div>
   );
 }

@@ -50,7 +50,7 @@ class BookListIndex extends React.Component<
   //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
   //}
   render() {
-    return <div></div>;
+    return <div>Hello World</div>;
   }
 }
 
