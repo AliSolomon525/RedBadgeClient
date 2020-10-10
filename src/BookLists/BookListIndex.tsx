@@ -2,7 +2,7 @@
 //the other 3 components (BookList Create, Edit, and Table)
 //BookListIndex is responsible for the splash page which users see after login
 import * as React from "react";
-//import BookListCreate from "./BookLists/BookListCreate";
+import BookListCreate from "./BookListCreate";
 //import BookListTable from "./BookLists/BookListTable";
 //import BookListEdit from "./BookLists/BookListEdit";
 import { Endpoints } from "../Components/Endpoints";
@@ -50,7 +50,11 @@ class BookListIndex extends React.Component<
   //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
   //}
   render() {
-    return <div>Hello World</div>;
+    const { classes }: any = this.props;
+    return <div>
+      
+      <BookListCreate token={this.props.token}/>
+    </div>;
   }
 }
 

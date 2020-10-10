@@ -1,6 +1,3 @@
-//BookListIndex is responsible for conditionally loading
-//the other 3 components (BookList Create, Edit, and Table)
-//BookListIndex is responsible for the splash page which users see after login
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -9,8 +6,10 @@ import Button from "@material-ui/core/Button";
 //import BookListTable from "./BookLists/BookListTable";
 //import BookListEdit from "./BookLists/BookListEdit";
 import { Endpoints } from "../Components/Endpoints";
+import { createStyles, Theme } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles =(theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -38,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: theme.spacing(2),
   },
-}));
+});
 
 export interface BookListIndexProps {
   token: string | null;
-  classes?: any;
+  classes: any;
 }
 export interface BookListIndexState {
   listname: string;
@@ -82,7 +81,7 @@ class BookListIndex extends React.Component<
   //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
   //}
   render() {
-    const classes = useStyles();
+    const { classes }: any = this.props;
     return (
       <div>
         <Grid container spacing={0}>
@@ -107,7 +106,7 @@ class BookListIndex extends React.Component<
     );
   }
 }
-export default BookListIndex;
+export default withStyles(useStyles)(BookListIndex);
 //requests & responses go down here
 export interface ResponseBodyBookList {
   id: number;
