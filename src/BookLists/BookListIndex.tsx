@@ -3,8 +3,8 @@
 //BookListIndex is responsible for the splash page which users see after login
 import * as React from "react";
 import BookListCreate from "./BookListCreate";
-//import BookListTable from "./BookLists/BookListTable";
-//import BookListEdit from "./BookLists/BookListEdit";
+import BookListTable from "./BookListTable";
+import BookListEdit from "./BooklistEdit";
 import { Endpoints } from "../Components/Endpoints";
 
 export interface BookListIndexProps {
@@ -15,6 +15,7 @@ export interface BookListIndexProps {
 export interface BookListIndexState {
   listname: string;
   listdescription: string;
+  openDialoge: boolean;
 }
 // [listname: string, listdescription: string]
 class BookListIndex extends React.Component<
@@ -26,8 +27,23 @@ class BookListIndex extends React.Component<
     this.state = {
       listname: "",
       listdescription: "",
+      openDialoge: true,
+      //fetch & store in state variable like booklistdata
+      //next, pass that down to the child component
+      //collect on this page the booklistdata 
     };
   }
+  fakeBookData=[
+    { id: 3,
+  listname: "1",
+  listdescription: "uno"},
+    { id: 3,
+    listname: "College List",
+    listdescription: "dos"},
+    { id: 3,
+      listname: "Fun REading",
+      listdescription: "tres"}]
+      
   //inside a method we can use vanilla JS
   onSubmit() {
     const body: RequestBodyBookList = {
@@ -52,9 +68,14 @@ class BookListIndex extends React.Component<
   render() {
     const { classes }: any = this.props;
     return <div>
-      
+      <BookListEdit token={this.props.token} openDialoge={this.state.openDialoge}/>
       <BookListCreate token={this.props.token}/>
+      <BookListTable rows={this.fakeBookData} token={this.props.token}/>
     </div>;
+  }
+  //create a method to pass on to the children
+  onUpdate=(data:any)=>{
+    this.setState({data})
   }
 }
 

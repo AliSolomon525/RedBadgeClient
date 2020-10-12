@@ -11,6 +11,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 const useStyles =(theme: Theme) => ({
   root: {
+    // display: 'flex',
+    // flexDirection: 'column',
     flexGrow: 1,
   },
   paper: {
@@ -60,7 +62,7 @@ class BookListIndex extends React.Component<
     };
   }
   //inside a method we can use vanilla JS
-  onSubmit() {
+  onSubmit=(event:any)=> {
     const body: RequestBodyBookList = {
       booklist: {
         listname: this.state.listname,
@@ -73,13 +75,12 @@ class BookListIndex extends React.Component<
       "Authorization",
       this.props.token != null ? this.props.token : ""
     );
-    const requestOptions = { method: "GET", headers: booklistHeaders };
-    fetch(Endpoints.authorization.getBookListById)
+    const requestOptions = { method: "POST", headers: booklistHeaders, body: JSON.stringify(body) };
+    fetch(Endpoints.authorization.bookListCreate,requestOptions)
       .then((res: any) => res.json())
       .then((json: ResponseBodyBookList) => console.log(json));
+    // alert("hello")
   }
-  //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
-  //}
   render() {
     const { classes }: any = this.props;
     return (
@@ -92,21 +93,68 @@ class BookListIndex extends React.Component<
                 variant="outlined"
                 label="Book List Name"
                 type="listname"
-                // value={listname}
                 onChange={(e) => this.setState({ listname: e.target.value })}
-                // className={classes.textField}
-                // InputLabelProps={{
-                //   shrink: true,
-                // }}
+              />
+            </form>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <form className={classes.container} noValidate>
+              <TextField
+                id="listdescription"
+                variant="outlined"
+                label="Book List Description"
+                type="listdescription"
+                onChange={(e) => this.setState({ listname: e.target.value })}
               />
             </form>
           </Grid>
         </Grid>
+        <br/>
+        <Button
+        // className={classes.but}
+        // type="submit"
+        // variant="contained"
+        // size="medium"
+        // textAlign="center"
+        onClick={(e)=>this.onSubmit(e)}
+      >
+        Create a Booklist
+      </Button>
+
+
       </div>
     );
   }
 }
-export default withStyles(useStyles)(BookListIndex);
+export default withStyles((theme)=> ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    // color: theme.palette.text.secondary,
+  },
+  title: {
+    textAlign: "center",
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+  but: {
+    marginLeft: theme.spacing(1),
+    textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
+}))(BookListIndex);
 //requests & responses go down here
 export interface ResponseBodyBookList {
   id: number;
