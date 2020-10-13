@@ -9,15 +9,19 @@ import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
+import BookIndex from "./Book/BookIndex";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
   //const [updateToken, setUpdate
   const [sessionToken, setSessionToken] = useState<string | null>("");
+  // const [open, setOpen] = useState<boolean>(false);
   useEffect(() => {
-    if (localStorage.getItem(token)) {
-      setSessionToken(localStorage.getItem(token));
+    let token = localStorage.getItem("token");
+    if (token) {
+      setSessionToken(token);
     }
+console.log(token);
   }, []);
   const updateToken = (newToken: string) => {
     localStorage.setItem("token", newToken);
@@ -31,7 +35,7 @@ function App() {
 
   const protectedViews = () => {
     return sessionToken === localStorage.getItem("token") ? (
-      <BookListIndex token={sessionToken} />
+      <BookIndex  token={sessionToken} />
     ) : (
       <div>
         <Auth token={sessionToken} updateToken={updateToken} />

@@ -1,6 +1,5 @@
 import React from 'react';
-import BookEdit from './BookEdit';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Endpoints } from '../Components/Endpoints';
 
-const useStyles = makeStyles({
+const useStyles = (theme: Theme) => ({
     root: {
       maxWidth: 345,
     },
@@ -21,7 +20,14 @@ const useStyles = makeStyles({
 
 
 export interface BookCardProps {
-    token: string;
+    token: string |null;
+    classes: any;
+    author: string;
+    title: string;
+    cover: string;
+    date: string;
+
+    // build out info that I want to display in cards: title, author, cover, date, etc;
 }
  
 export interface BookCardState {
@@ -34,6 +40,7 @@ export interface BookCardState {
 }
  
 class BookCard extends React.Component<BookCardProps, BookCardState> {
+    cards: any;
     constructor(props: BookCardProps) {
         super(props);
         this.state = {            
@@ -42,72 +49,63 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
         author: "",
         cover: "",
         owner: "",
-        booklist: "" };
+        booklist: "",
+    };
     }
 
-    onSubmit() {
-        const body: RequestBodyBook = {
-          book: {
-            date: this.state.date,
-            title: this.state.title,
-            author: this.state.author,
-            cover: this.state.cover,
-            owner: this.state.owner,
-            booklist: this.state.booklist
-          },
+    deleteBook = (id: number) => {
+        console.log(this.props.token);
+          let bookHeaders = new Headers();
+          bookHeaders.append("Content-Type", "application/json");
+          bookHeaders.append(
+            "Authorization",
+            this.props.token != null ? this.props.token : ""
+          );
+          const requestOptions = { method: "DELETE", headers: bookHeaders };
+          fetch(Endpoints.authorization.bookDelete+id, requestOptions)
+            .then((res: any) => res.json())
+            .then((json) => console.log(json));
         };
-        let bookHeaders = new Headers();
-        bookHeaders.append("Content-Type", "application/json");
-        bookHeaders.append(
-          "Authorization",
-          this.props.token != null ? this.props.token : ""
-        );
-        const requestOptions = { method: "GET", headers: bookHeaders };
-        fetch(Endpoints.authorization.getBookById)
-          .then((res: any) => res.json())
-          .then((json: ResponseBook) => console.log(json));
-      }
-
 
     render() { 
-    const classes = useStyles();
+        const { classes }: any = this.props;
     return ( 
+        //on parent of card needs to map through the data and pass that info to the card
         <div>
         <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={this.state.cover}
+            image={this.props.cover}
             title="Book Cover"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {this.state.title}
+              {this.props.title}
             </Typography>
             <Typography gutterBottom variant="h5" component="h2">
-              {this.state.author}
+              {this.props.author}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {this.state.date}
+              {this.props.date}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={() => {}}>
             Update
           </Button>
-          <Button size="small" color="primary">
+          <Button>
+          {/* <Button size="small" color="primary" onClick={() => {this.deleteBook(book.id)}}> */}
             Delete
           </Button>
         </CardActions>
       </Card>
-      <BookEdit token={this.props.token}/>
       </div>
  );
-}
-};
+}};
 
-export default BookCard;
+export default withStyles(useStyles)(BookCard);
 
 export interface RequestBodyBook {
     book: Book;
