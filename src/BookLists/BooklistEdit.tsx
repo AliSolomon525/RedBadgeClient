@@ -13,6 +13,7 @@ import { Endpoints } from '../Components/Endpoints';
 export interface BookListEditProps {
     token: string | null;
     openDialoge: boolean;
+    onUpdate: any;
 }
  
 export interface BookListEditState {
@@ -20,11 +21,12 @@ export interface BookListEditState {
   listdescription: string; 
 //   open: boolean;
   openDialoge: boolean;
+  
  
 }
  
 class BookListEdit extends React.Component<BookListEditProps, BookListEditState> {
-    handleClose: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined = () => {this.setState({openDialoge: false})};
+    // handleClose: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined = () => {this.setState({openDialoge: false})};
     handleOpen: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined = () => {
     //   this.setState({open: true})
     }
@@ -56,13 +58,15 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
           .then((json) => console.log(json));
       }
 
+    
+
     render() { 
         return ( 
             <div>
       <Button variant="outlined" color="primary" onClick={this.handleOpen}>
         Update Book List
       </Button>
-      <Dialog open={this.state.openDialoge} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={this.props.openDialoge} onClose={this.props.onUpdate} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Update Book List</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -89,7 +93,7 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
         <Button onClick={this.onSubmit} color="primary">
             Update
           </Button>
-          <Button onClick={this.handleClose} color="primary">
+          <Button onClick={()=>this.props.onUpdate()} color="primary">
             Cancel
           </Button>
         </DialogActions>

@@ -68,14 +68,15 @@ class BookListIndex extends React.Component<
   render() {
     const { classes }: any = this.props;
     return <div>
-      <BookListEdit token={this.props.token} openDialoge={this.state.openDialoge}/>
+      <BookListEdit onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge}/>
       <BookListCreate token={this.props.token}/>
-      <BookListTable rows={this.fakeBookData} token={this.props.token}/>
+      <BookListTable onUpdate={this.onUpdate} rows={this.fakeBookData} token={this.props.token}/>
     </div>;
   }
   //create a method to pass on to the children
-  onUpdate=(data:any)=>{
-    this.setState({data})
+  onUpdate=()=>{
+    this.setState({openDialoge: !this.state.openDialoge })
+    console.log(this.state.openDialoge)
   }
 }
 

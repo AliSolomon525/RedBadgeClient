@@ -26,6 +26,7 @@ export interface BookListTableProps {
     token: string | null;
     classes?: any;
     rows: any;
+    onUpdate: any;
 }
 
 export interface BookListTableState {
@@ -95,7 +96,7 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
               </TableCell>
 
             <TableCell><Button>Books</Button></TableCell>
-            <TableCell><Button>Update</Button></TableCell>
+            <TableCell><Button onClick={()=>{this.props.onUpdate()}}>Update</Button></TableCell>
             <TableCell><Button onClick={()=>this.deleteBookList(row.id)}>Delete</Button></TableCell>
             </TableRow>
 
