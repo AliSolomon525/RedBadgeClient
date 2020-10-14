@@ -1,5 +1,3 @@
-//BookList Edit Modal will only display if the 
-//user would like to edit the details of a workout
 import * as React from "react";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,6 +12,7 @@ export interface BookListEditProps {
     token: string | null;
     openDialoge: boolean;
     onUpdate: any;
+    rowData: any;
 }
  
 export interface BookListEditState {
@@ -21,8 +20,6 @@ export interface BookListEditState {
   listdescription: string; 
 //   open: boolean;
   openDialoge: boolean;
-  
- 
 }
  
 class BookListEdit extends React.Component<BookListEditProps, BookListEditState> {
@@ -34,9 +31,11 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
     constructor(props: BookListEditProps) {
         super(props);
         this.state = { 
-            listname: "", 
-        listdescription: "", 
-        openDialoge: this.props.openDialoge,  };
+            listname: this.props.rowData.listname, 
+        listdescription: this.props.rowData.listdescription, 
+        openDialoge: this.props.openDialoge,
+
+        };
     }
 
     onSubmit() {
@@ -53,19 +52,33 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
           this.props.token != null ? this.props.token : ""
         );
         const requestOptions = { method: "PUT", headers: booklistHeaders };
-        fetch(Endpoints.authorization.bookListUpdate)
+        fetch(Endpoints.authorization.bookListUpdate, requestOptions)
           .then((res: any) => res.json())
           .then((json) => console.log(json));
       }
 
-    
+    //method for rowID updateRecord
+//edit needs to use this info
+// updateRecord(){
+//   console.log(this.props.token);
+//         let bookHeaders = new Headers();
+//         bookHeaders.append("Content-Type", "application/json");
+//         bookHeaders.append(
+//           "Authorization",
+//           this.props.token != null ? this.props.token : ""
+//         );
+//         const requestOptions = { method: "PUT", headers: bookHeaders };
+//         fetch(Endpoints.authorization.bookListUpdate, requestOptions)
+//           .then((res: any) => res.json())
+//           .then((json: any) => {console.log(json)})
+// }
 
     render() { 
         return ( 
             <div>
-      <Button variant="outlined" color="primary" onClick={this.handleOpen}>
+      {/* <Button variant="outlined" color="primary" onClick={this.handleOpen}>
         Update Book List
-      </Button>
+      </Button> */}
       <Dialog open={this.props.openDialoge} onClose={this.props.onUpdate} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Update Book List</DialogTitle>
         <DialogContent>
@@ -79,6 +92,8 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
             label="Book List Name"
             type="string"
             fullWidth
+            onChange={(e) => this.setState({ listname: e.target.value })}
+            value={this.state.listname}
           />
           <TextField
             autoFocus
@@ -87,6 +102,8 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
             label="Book List Description"
             type="string"
             fullWidth
+            onChange={(e) => this.setState({ listdescription: e.target.value })}
+                value={this.state.listdescription}
           />
         </DialogContent>
         <DialogActions>

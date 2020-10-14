@@ -1,6 +1,3 @@
-//BookListIndex is responsible for conditionally loading
-//the other 3 components (BookList Create, Edit, and Table)
-//BookListIndex is responsible for the splash page which users see after login
 import * as React from "react";
 import BookListCreate from "./BookListCreate";
 import BookListTable from "./BookListTable";
@@ -16,6 +13,8 @@ export interface BookListIndexState {
   listname: string;
   listdescription: string;
   openDialoge: boolean;
+  bookListData: any;
+   rowData: any;
 }
 // [listname: string, listdescription: string]
 class BookListIndex extends React.Component<
@@ -27,25 +26,31 @@ class BookListIndex extends React.Component<
     this.state = {
       listname: "",
       listdescription: "",
-      openDialoge: true,
+      openDialoge: false,
+      bookListData: [],
+      rowData: {
+        listname:"NAME",
+        listdescription: "",
+      },
       //fetch & store in state variable like booklistdata
       //next, pass that down to the child component
       //collect on this page the booklistdata 
     };
   }
-  fakeBookData=[
-    { id: 3,
-  listname: "1",
-  listdescription: "uno"},
-    { id: 3,
-    listname: "College List",
-    listdescription: "dos"},
-    { id: 3,
-      listname: "Fun REading",
-      listdescription: "tres"}]
+  // fakeBookData=[
+  //   { id: 3,
+  // listname: "1",
+  // listdescription: "uno"},
+  //   { id: 3,
+  //   listname: "College List",
+  //   listdescription: "dos"},
+  //   { id: 3,
+  //     listname: "Fun REading",
+  //     listdescription: "tres"}]
       
   //inside a method we can use vanilla JS
-  onSubmit() {
+  onLoad() {
+    console.log(this.props.token)
     const body: RequestBodyBookList = {
       booklist: {
         listname: this.state.listname,
@@ -59,24 +64,28 @@ class BookListIndex extends React.Component<
       this.props.token != null ? this.props.token : ""
     );
     const requestOptions = { method: "GET", headers: booklistHeaders };
-    fetch(Endpoints.authorization.getBookListById)
+    fetch(Endpoints.authorization.getAllBookLists, requestOptions)
       .then((res: any) => res.json())
-      .then((json) => console.log(json));
-  }
-  //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
-  //}
+      .then((json) => {console.log(json); 
+        this.setState({bookListData: json})});
+  };
+
+componentDidMount(){
+  this.onLoad();
+}
+
   render() {
     const { classes }: any = this.props;
     return <div>
-      <BookListEdit onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge}/>
+      <BookListEdit rowData={this.state.rowData} onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge}/>
       <BookListCreate token={this.props.token}/>
-      <BookListTable onUpdate={this.onUpdate} rows={this.fakeBookData} token={this.props.token}/>
+      <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token}/>
     </div>;
   }
   //create a method to pass on to the children
-  onUpdate=()=>{
-    this.setState({openDialoge: !this.state.openDialoge })
-    console.log(this.state.openDialoge)
+  onUpdate=(row: any)=>{
+    this.setState({openDialoge: !this.state.openDialoge, rowData: row })
+    console.log(row.listname)
   }
 }
 
