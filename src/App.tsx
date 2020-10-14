@@ -9,6 +9,9 @@ import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import About from "./Components/About";
+import BookClub from "./Components/BookClub";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
@@ -42,10 +45,21 @@ function App() {
 
   return (
     <div className="App">
+      <Router>
       <div>
-        <Nav />
+        <Nav clickLogout={clearToken}/>
       </div>
+      <Switch>
+        <Route path="/about"><About /></Route>
+        <Route path="/bookclub"><BookClub/></Route>
+      <Route path="/">
       {protectedViews()}
+      </Route>
+      <Route path="/banner">
+      <Banner/>
+      </Route>
+      </Switch>
+      </Router>
     </div>
   );
 }
