@@ -60,7 +60,7 @@ class BookClub extends React.Component<BookClubProps, BookClubState> {
         <AccordionDetails>
           <Typography>
             Date Founded: 1996 <br />
-            Website: <a href="http://www.oprah.com/app/books.html">Oprah's Book Club</a>
+            Website: <a href="http://www.oprah.com/app/books.html" target="blank">Oprah's Book Club</a>
 
           </Typography>
         </AccordionDetails>
@@ -77,7 +77,7 @@ class BookClub extends React.Component<BookClubProps, BookClubState> {
         <AccordionDetails>
           <Typography>
             Date Founded: 2016 <br />
-            Website: <a href="https://www.goodreads.com/group/show/179584-our-shared-shelf">Our Shared Shelf</a>
+            Website: <a href="https://www.goodreads.com/group/show/179584-our-shared-shelf" target="blank">Our Shared Shelf</a>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -93,7 +93,7 @@ class BookClub extends React.Component<BookClubProps, BookClubState> {
         <AccordionDetails>
           <Typography>
             Date Founded: 2016 <br />
-            Website: <a href="https://hello-sunshine.com/book-club">Hello Sunshine</a>
+            Website: <a href="https://hello-sunshine.com/book-club" target="blank">Hello Sunshine</a>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -109,7 +109,7 @@ class BookClub extends React.Component<BookClubProps, BookClubState> {
         <AccordionDetails>
           <Typography>
           Date Founded: 1995 <br />
-            Website: <a href="https://imaginationlibrary.com/usa/book-list/">Dolly Parton's Imagination Library</a>
+            Website: <a href="https://imaginationlibrary.com/usa/book-list/" target="blank">Dolly Parton's Imagination Library</a>
           </Typography>
         </AccordionDetails>
       </Accordion>

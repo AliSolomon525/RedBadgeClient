@@ -32,8 +32,10 @@
 
 .container {
   padding: 1em;
-  display: flex;
-  flex-wrap: wrap;
+  padding-left: 25%;
+  width: 100%;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   background-color: #ddbea9;
   border-bottom: double 2px #a5a58d;
 }
