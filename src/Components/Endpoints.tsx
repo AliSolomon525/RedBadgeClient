@@ -13,7 +13,7 @@ export const Endpoints = {
     getBookById: `http://localhost:3000/api/book/books/:id`,
     getAllBooks: `http://localhost:3000/api/book/books`,
     bookListCreate: `http://localhost:3000/api/booklist/create`,
-    bookListUpdate: `http://localhost:3000/api/booklist/updatelist/:id`,
+    bookListUpdate: `http://localhost:3000/api/booklist/updatelist/`,
     bookListDelete: `http://localhost:3000/api/booklist/list/`,
     getBookListById: `http://localhost:3000/api/booklist/booklist/:id`,
     getAllBookLists: `http://localhost:3000/api/booklist/booklists`,

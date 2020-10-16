@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import Oprah from "../assets/Oprah.jpg";
+import Oprah from "../assets/oprah.jpg";
 import Emma from "../assets/Emma.jpg";
 import Reese from "../assets/Reese.jpg";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
