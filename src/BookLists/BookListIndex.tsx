@@ -1,10 +1,7 @@
-//BookListIndex is responsible for conditionally loading
-//the other 3 components (BookList Create, Edit, and Table)
-//BookListIndex is responsible for the splash page which users see after login
 import * as React from "react";
-//import BookListCreate from "./BookLists/BookListCreate";
-//import BookListTable from "./BookLists/BookListTable";
-//import BookListEdit from "./BookLists/BookListEdit";
+import BookListCreate from "./BookListCreate";
+import BookListTable from "./BookListTable";
+import BookListEdit, { RequestBodyBookListUpdate } from "./BooklistEdit";
 import { Endpoints } from "../Components/Endpoints";
 
 export interface BookListIndexProps {
@@ -15,9 +12,10 @@ export interface BookListIndexProps {
 export interface BookListIndexState {
   listname: string;
   listdescription: string;
-}
-// [listname: string, listdescription: string]
-class BookListIndex extends React.Component<
+  openDialoge: boolean;
+  bookListData: any;
+   rowData: any;}
+   class BookListIndex extends React.Component<
   BookListIndexProps,
   BookListIndexState
 > {
@@ -26,16 +24,34 @@ class BookListIndex extends React.Component<
     this.state = {
       listname: "",
       listdescription: "",
+      openDialoge: false,
+      bookListData: [],
+      rowData: {
+        listname:"",
+        listdescription: "",
+      },
+      //fetch & store in state variable like booklistdata
+      //next, pass that down to the child component
+      //collect on this page the booklistdata 
     };
   }
-  //inside a method we can use vanilla JS
-  onSubmit() {
-    const body: RequestBodyBookList = {
+  onUpDateSubmit=()=> {console.log(this.state.rowData)
+    const body: RequestBodyBookListUpdate = {
       booklist: {
-        listname: this.state.listname,
-        listdescription: this.state.listdescription,
+        listname: this.state.rowData.listname,
+        listdescription: this.state.rowData.listdescription,
       },
     };
+  
+    let booklistHeaders = new Headers();
+    booklistHeaders.append("Content-Type", "application/json");
+    booklistHeaders.append(
+      "Authorization",
+      this.props.token != null ? this.props.token : ""
+    );const requestOptions = { method: "PUT", headers: booklistHeaders , body: JSON.stringify(body)};fetch(Endpoints.authorization.bookListUpdate+this.state.rowData.id, requestOptions).then((res: any) => res.json()).then((json) => this.onLoad());}
+
+    onLoad=()=> {
+    
     let booklistHeaders = new Headers();
     booklistHeaders.append("Content-Type", "application/json");
     booklistHeaders.append(
@@ -43,19 +59,33 @@ class BookListIndex extends React.Component<
       this.props.token != null ? this.props.token : ""
     );
     const requestOptions = { method: "GET", headers: booklistHeaders };
-    fetch(Endpoints.authorization.getBookListById)
+    fetch(Endpoints.authorization.getAllBookLists, requestOptions)
       .then((res: any) => res.json())
-      .then((json) => console.log(json));
-  }
-  //fetch(Endpoints.authorization.getBookListById).then((res:any)=> res.json()).then(json=> console.log(json))
-  //}
-  render() {
-    return <div>Hello World</div>;
-  }
+      .then((json) => {console.log(json); 
+        this.setState({bookListData: json})});
+  };
+
+componentDidMount(){
+  this.onLoad();
 }
 
-export default BookListIndex;
+onUpdate=(row: any)=>{
+  this.setState({openDialoge: !this.state.openDialoge, rowData: row })
+}
 
+updateIndexStateRowData = (value: any) =>{
+  this.setState({rowData: value})
+  console.log(value)};
+  render() {
+    const { classes }: any = this.props;
+    return <div>
+      <BookListEdit rowData={this.state.rowData} updateIndexStateRowData={this.updateIndexStateRowData} onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge} onUpDateSubmit={this.onUpDateSubmit}/>
+      <BookListCreate token={this.props.token} onLoad={this.onLoad}/>
+      <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token} onLoad={this.onLoad}/>
+    </div>;
+  }
+}
+export default BookListIndex;
 //requests & responses go down here
 export interface ResponseBodyBookList {
   id: number;
@@ -65,7 +95,6 @@ export interface ResponseBodyBookList {
   createdAt: Date;
   updatedAt: Date;
 }
-
 export interface RequestBodyBookList {
   booklist: BookList;
 }
