@@ -44,6 +44,7 @@ const useStyles =(theme: Theme) => ({
 export interface BookListIndexProps {
   token: string | null;
   classes: any;
+  onLoad: any;
 }
 export interface BookListIndexState {
   listname: string;
@@ -78,7 +79,7 @@ class BookListIndex extends React.Component<
     const requestOptions = { method: "POST", headers: booklistHeaders, body: JSON.stringify(body) };
     fetch(Endpoints.authorization.bookListCreate,requestOptions)
       .then((res: any) => res.json())
-      .then((json: ResponseBodyBookList) => console.log(json));
+      .then((json: ResponseBodyBookList) => this.props.onLoad());
     // alert("hello")
   }
   render() {
@@ -104,7 +105,7 @@ class BookListIndex extends React.Component<
                 variant="outlined"
                 label="Book List Description"
                 type="listdescription"
-                onChange={(e) => this.setState({ listname: e.target.value })}
+                onChange={(e) => this.setState({ listdescription: e.target.value })}
               />
             </form>
           </Grid>

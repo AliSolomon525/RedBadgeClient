@@ -27,6 +27,7 @@ export interface BookListTableProps {
     classes?: any;
     rows: any;
     onUpdate: any;
+    onLoad: any;
 }
 
 export interface BookListTableState {
@@ -44,14 +45,6 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
          };
     }
 
-    //method for book button in table
-    // getBooks(){
-    //     const: body: RequestBodyBooks = {
-
-    //     }
-    // }
-
-
     //method to delete books lists from table button
     deleteBookList(id:number){
       console.log(this.props.token)
@@ -64,7 +57,7 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
       const requestOptions = { method: "DELETE", headers: booklistHeaders };
       fetch(Endpoints.authorization.bookListDelete+id,requestOptions)
         .then((res: any) => res.json())
-        .then((json) => console.log(json));
+        .then((json) => this.props.onLoad());
     }
 
 
@@ -99,8 +92,6 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
             <TableCell><Button onClick={()=>{this.props.onUpdate(row)}}>Update</Button></TableCell>
             <TableCell><Button onClick={()=>this.deleteBookList(row.id)}>Delete</Button></TableCell>
             </TableRow>
-
-            
           ))}
         </TableBody>
       </Table>

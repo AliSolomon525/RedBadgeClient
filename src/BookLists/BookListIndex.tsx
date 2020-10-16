@@ -1,7 +1,7 @@
 import * as React from "react";
 import BookListCreate from "./BookListCreate";
 import BookListTable from "./BookListTable";
-import BookListEdit from "./BooklistEdit";
+import BookListEdit, { RequestBodyBookListUpdate } from "./BooklistEdit";
 import { Endpoints } from "../Components/Endpoints";
 
 export interface BookListIndexProps {
@@ -14,10 +14,8 @@ export interface BookListIndexState {
   listdescription: string;
   openDialoge: boolean;
   bookListData: any;
-   rowData: any;
-}
-// [listname: string, listdescription: string]
-class BookListIndex extends React.Component<
+   rowData: any;}
+   class BookListIndex extends React.Component<
   BookListIndexProps,
   BookListIndexState
 > {
@@ -29,7 +27,7 @@ class BookListIndex extends React.Component<
       openDialoge: false,
       bookListData: [],
       rowData: {
-        listname:"NAME",
+        listname:"",
         listdescription: "",
       },
       //fetch & store in state variable like booklistdata
@@ -37,26 +35,24 @@ class BookListIndex extends React.Component<
       //collect on this page the booklistdata 
     };
   }
-  // fakeBookData=[
-  //   { id: 3,
-  // listname: "1",
-  // listdescription: "uno"},
-  //   { id: 3,
-  //   listname: "College List",
-  //   listdescription: "dos"},
-  //   { id: 3,
-  //     listname: "Fun REading",
-  //     listdescription: "tres"}]
-      
-  //inside a method we can use vanilla JS
-  onLoad() {
-    console.log(this.props.token)
-    const body: RequestBodyBookList = {
+  onUpDateSubmit=()=> {console.log(this.state.rowData)
+    const body: RequestBodyBookListUpdate = {
       booklist: {
-        listname: this.state.listname,
-        listdescription: this.state.listdescription,
+        listname: this.state.rowData.listname,
+        listdescription: this.state.rowData.listdescription,
       },
     };
+  
+    let booklistHeaders = new Headers();
+    booklistHeaders.append("Content-Type", "application/json");
+    booklistHeaders.append(
+      "Authorization",
+      this.props.token != null ? this.props.token : ""
+    );const requestOptions = { method: "PUT", headers: booklistHeaders , body: JSON.stringify(body)};fetch(Endpoints.authorization.bookListUpdate+this.state.rowData.id, requestOptions).then((res: any) => res.json()).then((json) => this.onLoad());}
+
+
+    onLoad=()=> {
+    
     let booklistHeaders = new Headers();
     booklistHeaders.append("Content-Type", "application/json");
     booklistHeaders.append(
@@ -74,23 +70,25 @@ componentDidMount(){
   this.onLoad();
 }
 
+onUpdate=(row: any)=>{
+  this.setState({openDialoge: !this.state.openDialoge, rowData: row })
+}
+
+updateIndexStateRowData = (value: any) =>{
+  this.setState({rowData: value})
+  console.log(value)};
   render() {
     const { classes }: any = this.props;
     return <div>
-      <BookListEdit rowData={this.state.rowData} onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge}/>
-      <BookListCreate token={this.props.token}/>
-      <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token}/>
+      <BookListEdit rowData={this.state.rowData} updateIndexStateRowData={this.updateIndexStateRowData} onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge} onUpDateSubmit={this.onUpDateSubmit}/>
+      <BookListCreate token={this.props.token} onLoad={this.onLoad}/>
+      <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token} onLoad={this.onLoad}/>
     </div>;
   }
-  //create a method to pass on to the children
-  onUpdate=(row: any)=>{
-    this.setState({openDialoge: !this.state.openDialoge, rowData: row })
-    console.log(row.listname)
-  }
+
+ 
 }
-
 export default BookListIndex;
-
 //requests & responses go down here
 export interface ResponseBodyBookList {
   id: number;
@@ -100,7 +98,6 @@ export interface ResponseBodyBookList {
   createdAt: Date;
   updatedAt: Date;
 }
-
 export interface RequestBodyBookList {
   booklist: BookList;
 }

@@ -6,19 +6,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Endpoints } from '../Components/Endpoints';
 
 export interface BookListEditProps {
-    token: string | null;
-    openDialoge: boolean;
-    onUpdate: any;
-    rowData: any;
+  token: string | null;
+  openDialoge: boolean;
+  onUpdate: any;
+  rowData: any;
+  updateIndexStateRowData: any;
+  onUpDateSubmit: any;
 }
  
 export interface BookListEditState {
   listname: string;
   listdescription: string; 
-//   open: boolean;
   openDialoge: boolean;
 }
  
@@ -34,46 +34,28 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
             listname: this.props.rowData.listname, 
         listdescription: this.props.rowData.listdescription, 
         openDialoge: this.props.openDialoge,
-
-        };
+      };
     }
 
-    onSubmit() {
-        const body: RequestBodyBookListUpdate = {
-          booklist: {
-            listname: this.state.listname,
-            listdescription: this.state.listdescription,
-          },
-        };
-        let booklistHeaders = new Headers();
-        booklistHeaders.append("Content-Type", "application/json");
-        booklistHeaders.append(
-          "Authorization",
-          this.props.token != null ? this.props.token : ""
-        );
-        const requestOptions = { method: "PUT", headers: booklistHeaders };
-        fetch(Endpoints.authorization.bookListUpdate, requestOptions)
-          .then((res: any) => res.json())
-          .then((json) => console.log(json));
-      }
-
-    //method for rowID updateRecord
-//edit needs to use this info
-// updateRecord(){
-//   console.log(this.props.token);
-//         let bookHeaders = new Headers();
-//         bookHeaders.append("Content-Type", "application/json");
-//         bookHeaders.append(
-//           "Authorization",
-//           this.props.token != null ? this.props.token : ""
-//         );
-//         const requestOptions = { method: "PUT", headers: bookHeaders };
-//         fetch(Endpoints.authorization.bookListUpdate, requestOptions)
-//           .then((res: any) => res.json())
-//           .then((json: any) => {console.log(json)})
-// }
-
-    render() { 
+//FOR THE LIST NAME!
+handleChangeListName = (e:any)=>{
+  let RowObject = {
+    id: this.props.rowData.id,
+    listname: e.target.value,
+    listdescription: this.props.rowData.listdescription,
+  }
+  this.props.updateIndexStateRowData(RowObject)
+}
+//FOR THE LIST DESCRIPTION!
+handleChangeListDescription = (e:any)=>{
+  let RowObject = {
+    id: this.props.rowData.id,
+    listname: this.props.rowData.listname,
+    listdescription: e.target.value,
+  }
+  this.props.updateIndexStateRowData(RowObject)
+}
+render() { 
         return ( 
             <div>
       {/* <Button variant="outlined" color="primary" onClick={this.handleOpen}>
@@ -92,8 +74,8 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
             label="Book List Name"
             type="string"
             fullWidth
-            onChange={(e) => this.setState({ listname: e.target.value })}
-            value={this.state.listname}
+            onChange={(e) => this.handleChangeListName(e)}
+            value={this.props.rowData != undefined ?  this.props.rowData.listname: ""}
           />
           <TextField
             autoFocus
@@ -102,15 +84,25 @@ class BookListEdit extends React.Component<BookListEditProps, BookListEditState>
             label="Book List Description"
             type="string"
             fullWidth
-            onChange={(e) => this.setState({ listdescription: e.target.value })}
-                value={this.state.listdescription}
+            onChange={(e) => this.handleChangeListDescription(e)}
+                value={this.props.rowData != undefined ? this.props.rowData.listdescription: ""}
           />
         </DialogContent>
         <DialogActions>
-        <Button onClick={this.onSubmit} color="primary">
+        <Button onClick={()=>{
+            this.props.onUpdate()
+          this.props.onUpDateSubmit()
+        
+        
+        }} color="primary">
             Update
           </Button>
-          <Button onClick={()=>this.props.onUpdate()} color="primary">
+          <Button onClick={()=>{
+            this.props.onUpdate()
+          this.props.onUpDateSubmit()
+        
+        
+        }}>
             Cancel
           </Button>
         </DialogActions>
@@ -139,4 +131,3 @@ export interface ResponseBodyBookListUpdate {
     listname: string;
     listdescription: string;
   }
-  
