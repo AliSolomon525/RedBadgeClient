@@ -18,6 +18,7 @@ class Banner extends React.Component<BannerProps, BannerState> {
       <div>
         {/* <hr className="bannerLine" /> */}
         <img src={banner2} alt="book" style={{ width: "100%" }} />
+        <div className="about-footer">&copy; BookWyrm BookClub 2020</div>
       </div>
     );
   }

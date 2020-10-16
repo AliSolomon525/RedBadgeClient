@@ -47,7 +47,7 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
       .then((response) => response.json())
       .then((data: LoginAdminResponse) => {
         console.log(data);
-        this.props.updateToken(data.sessionToken);
+        this.props.updateToken(data.sessionToken, data.isAdmin);
         this.setState({
           username: "",
           password: "",
@@ -120,6 +120,7 @@ export interface LoginAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+  isAdmin: string;
 }
 
 export interface Admin {
