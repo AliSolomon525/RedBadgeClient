@@ -9,10 +9,11 @@ import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import About from "./Components/About";
 import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
@@ -52,21 +53,23 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
+      <GuardProvider>
       <div>
         <Nav clickLogout={clearToken}/>
       </div>
       <Switch>
-        <Route path="/about"><About /></Route>
-        <Route path="/bookclub"><BookClub/></Route>
-      <Route path="/">
+        <GuardedRoute path="/about"><About /></GuardedRoute>
+        <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
+      <GuardedRoute path="/">
       {protectedViews()}
-      </Route>
-      <Route path="/banner">
+      </GuardedRoute>
+      <GuardedRoute path="/banner">
       <Banner/>
-      </Route>
+      </GuardedRoute>
       </Switch>
-      </Router>
+      </GuardProvider>
+      </BrowserRouter>
     </div>
   );
 }

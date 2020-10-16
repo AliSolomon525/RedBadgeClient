@@ -22,6 +22,7 @@
     "react-dom": "^16.13.1",
     "react-responsive-carousel": "^3.2.10",
     "react-router-dom": "^5.2.0",
+    "react-router-guards": "^1.0.2",
     "react-scripts": "3.4.3",
     "react-swipeable-views": "^0.13.9",
     "typescript": "^3.7.5"
