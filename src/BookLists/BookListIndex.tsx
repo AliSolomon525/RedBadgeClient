@@ -50,7 +50,6 @@ export interface BookListIndexState {
       this.props.token != null ? this.props.token : ""
     );const requestOptions = { method: "PUT", headers: booklistHeaders , body: JSON.stringify(body)};fetch(Endpoints.authorization.bookListUpdate+this.state.rowData.id, requestOptions).then((res: any) => res.json()).then((json) => this.onLoad());}
 
-
     onLoad=()=> {
     
     let booklistHeaders = new Headers();
@@ -85,8 +84,6 @@ updateIndexStateRowData = (value: any) =>{
       <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token} onLoad={this.onLoad}/>
     </div>;
   }
-
- 
 }
 export default BookListIndex;
 //requests & responses go down here
