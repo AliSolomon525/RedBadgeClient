@@ -20,9 +20,11 @@ function App() {
   //const [updateToken, setUpdate
   const [sessionToken, setSessionToken] = useState<string | null>("");
   useEffect(() => {
-    if (localStorage.getItem(token)) {
-      setSessionToken(localStorage.getItem(token));
+    let token = localStorage.getItem("token");
+    if (token) {
+      setSessionToken(token);
     }
+console.log(token);
   }, []);
   const updateToken = (newToken: string, isAdmin = "false") => {
     localStorage.setItem("token", newToken);
