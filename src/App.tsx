@@ -14,6 +14,7 @@ import About from "./Components/About";
 import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import AdminPageIndex from "./LoginSignup/AdminPageIndex";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
@@ -41,7 +42,7 @@ console.log(token);
     const isAdmin = localStorage.getItem("isAdmin");
     if (sessionToken === localStorage.getItem("token")) {
       if (isAdmin === "true") {
-        return <AdminPage />
+        return <AdminPageIndex token={sessionToken}/>
       } else {
         return <BookListIndex token={sessionToken}/>
       }
