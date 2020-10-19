@@ -67,7 +67,7 @@ componentDidMount(){
         return (
             <div>
             <BookEdit token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialog}/> 
-            <BookCreate token={this.props.token} openDialog={this.state.openDialog}/>
+            <BookCreate token={this.props.token} openDialog={this.state.openDialog} onLoad={this.onLoad} />
             {this.state.bookData.map((book: ResponseBook) => <BookCard token={this.props.token} author={book.author} title={book.title} cover={book.cover} date={book.date} /> )}
             </div>
          );

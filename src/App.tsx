@@ -19,6 +19,7 @@ import AdminPageIndex from "./LoginSignup/AdminPageIndex";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
+  const [hideBookIndex, setHideBookIndex]= useState<boolean>(false);
   //const [updateToken, setUpdate
   const [sessionToken, setSessionToken] = useState<string | null>("");
   // const [open, setOpen] = useState<boolean>(false);
@@ -50,7 +51,7 @@ console.log(token);
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return <BookListIndex token={sessionToken}/>
+        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
       }
     } else {
         return (<div>

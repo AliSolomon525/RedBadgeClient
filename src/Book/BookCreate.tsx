@@ -44,6 +44,7 @@ const useStyles =(theme: Theme) => ({
 export interface BookCreateProps {
     token: string | null;
     openDialog: boolean;
+    onLoad: any;
 }
  
 export interface BookCreateState {
@@ -93,7 +94,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
         const requestOptions = { method: "POST", headers: bookHeaders };
         fetch(Endpoints.authorization.bookCreate)
           .then((res: any) => res.json())
-          .then((json: ResponseBook) => console.log(json));
+          .then((json: ResponseBook) => this.props.onLoad());
       }
 
 
