@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = (theme: Theme) => ({
   root: {
@@ -20,12 +21,7 @@ const useStyles = (theme: Theme) => ({
     color: "#fffdfb",
     font: "Lucida Sans Unicode",
   },
-  color: {
-    backgroundColor: "A5A58D",
-  },
 });
-
-// export interface Props extends WithStyles<typeof styles>
 
 export interface NavProps {
   username?: string;
@@ -71,10 +67,40 @@ class Nav extends React.Component<NavProps, NavState> {
             <Typography variant="h6" className={classes.title}>
               BookWyrm BookClub
             </Typography>
-            {/* <Button onClick={this.showSignup}>User: Sign Up</Button> */}
-            <Button>About Us</Button>
-            <Button>Book Clubs</Button>
-            <Button onClick={this.props.clickLogout}>Logout</Button>
+
+           <Link to="/banner"
+           style={{
+            textDecoration: "none",
+            color: "black",
+            textTransform: "uppercase",
+            fontSize: "15px",
+            paddingRight: "10px",
+          }}>Home</Link>
+
+            <Link to="/about"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              textTransform: "uppercase",
+              fontSize: "15px",
+              paddingRight: "5px",
+            }}>About Us</Link>
+
+            <Link to="/bookclub"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              textTransform: "uppercase",
+              fontSize: "15px",
+              padding: "4px",
+            }}>Book Clubs</Link>
+
+            <Button onClick={this.props.clickLogout} style={{
+              textDecoration: "none",
+              color: "white",
+              textTransform: "uppercase",
+              fontSize: "14px",
+            }}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>
