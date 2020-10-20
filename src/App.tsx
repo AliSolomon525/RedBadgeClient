@@ -9,6 +9,7 @@ import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
+import BookIndex from "./Book/BookIndex";
 import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import About from "./Components/About";
 import BookClub from "./Components/BookClub";
@@ -18,8 +19,10 @@ import AdminPageIndex from "./LoginSignup/AdminPageIndex";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
+  const [hideBookIndex, setHideBookIndex]= useState<boolean>(false);
   //const [updateToken, setUpdate
   const [sessionToken, setSessionToken] = useState<string | null>("");
+  // const [open, setOpen] = useState<boolean>(false);
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) {
@@ -39,12 +42,16 @@ console.log(token);
   };
 
   const protectedViews = () => {
+    // return sessionToken === localStorage.getItem("token") ? (
+    //   <BookIndex  token={sessionToken} />
+    // ) : (
+    //   <div>
     const isAdmin = localStorage.getItem("isAdmin");
     if (sessionToken === localStorage.getItem("token")) {
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return <BookListIndex token={sessionToken}/>
+        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
       }
     } else {
         return (<div>
