@@ -26,8 +26,10 @@ export interface BookCardProps {
     title: string;
     cover: string;
     date: string;
-
-    // build out info that I want to display in cards: title, author, cover, date, etc;
+    id: number;
+    onUpdateSubmit: any;
+    onLoad: any;
+    onUpdate: any;
 }
  
 export interface BookCardState {
@@ -64,14 +66,13 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
           const requestOptions = { method: "DELETE", headers: bookHeaders };
           fetch(Endpoints.authorization.bookDelete+id, requestOptions)
             .then((res: any) => res.json())
-            .then((json) => console.log(json));
+            .then((json) => this.props.onLoad());
         };
 
     render() { 
         const { classes }: any = this.props;
-    return ( 
-        //on parent of card needs to map through the data and pass that info to the card
-        <div>
+    return (
+      <div>
         <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -92,13 +93,12 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => {}}>
+          <Button size="small" color="primary" onClick={() => {this.props.onUpdate()}}>
             Update
           </Button>
-          <Button>
-          {/* <Button size="small" color="primary" onClick={() => {this.deleteBook(book.id)}}> */}
+          {/* <Button size="small" color="primary" onClick={() => {this.deleteBook(book.id)}}>
             Delete
-          </Button>
+          </Button> */}
         </CardActions>
       </Card>
       </div>

@@ -45,6 +45,10 @@ export interface BookCreateProps {
     token: string | null;
     openDialog: boolean;
     onLoad: any;
+<<<<<<< Updated upstream
+=======
+    onCreate: any;
+>>>>>>> Stashed changes
 }
  
 export interface BookCreateState {
@@ -58,7 +62,6 @@ export interface BookCreateState {
 
 
 class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
-  handleClose: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined = () => {this.setState({})}
   handleOpen: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined = () => {
     // this.setState({open: true})
   }
@@ -70,11 +73,11 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             author: "",
             cover: "",
             owner: "",
-            booklist: "",
+            booklist: 2,
          };
     }
 
-    onSubmit() {
+    onSubmit(event: any) {
         const body: RequestBodyBook = {
           book: {
             date: this.state.date,
@@ -91,20 +94,26 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
           "Authorization",
           this.props.token != null ? this.props.token : ""
         );
-        const requestOptions = { method: "POST", headers: bookHeaders };
-        fetch(Endpoints.authorization.bookCreate)
+        const requestOptions = { method: "POST", headers: bookHeaders, body: JSON.stringify(body)};
+        fetch(Endpoints.authorization.bookCreate, requestOptions)
           .then((res: any) => res.json())
+<<<<<<< Updated upstream
           .then((json: ResponseBook) => this.props.onLoad());
+=======
+          .then((json: ResponseBook) => {
+            this.props.onLoad()
+            this.props.onCreate()});
+>>>>>>> Stashed changes
       }
 
 
     render() { 
         return ( 
           <div>
-          <Button variant="outlined" color="primary" onClick={this.handleOpen}>
+          <Button variant="outlined" color="primary" onClick={this.props.onCreate}  >
             Add a Book
           </Button>
-          <Dialog open={this.props.openDialog} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+          <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Add a Book</DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -115,6 +124,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 label="Title"
                 type="title"
                 fullWidth
+                onChange={(e) => this.setState({ title: e.target.value })}
               />
               <TextField
                 autoFocus
@@ -122,12 +132,14 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 label="Author"
                 type="author"
                 fullWidth
+                onChange={(e) => this.setState({ author: e.target.value })}
               />
                <TextField
                 autoFocus
                 margin="dense"
                 type="date"
                 fullWidth
+                onChange={(e) => this.setState({ date: e.target.value})}
               />
                 <TextField
                 autoFocus
@@ -135,13 +147,14 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 label="Cover"
                 type="cover"
                 fullWidth
+                onChange={(e) => this.setState({ cover: e.target.value })}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.onSubmit} color="primary">
+              <Button onClick={(e)=>this.onSubmit(e)} color="primary">
                 Add Book
               </Button>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={this.props.onCreate} color="primary">
                 Cancel
               </Button>
             </DialogActions>

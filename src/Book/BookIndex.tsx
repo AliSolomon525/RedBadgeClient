@@ -9,43 +9,61 @@ export interface BookIndexProps {
 }
  
 export interface BookIndexState {
-    openDialog: boolean;
+    openDialogCreate: boolean;
+    openDialogUpdate: boolean;
     bookData: any;
+    id: number;
+    title: string;
+    author: string;
+    cover: string;
+    booklist: number | string;
+    date: number| string;
+    owner: number | string;
 }
  
 class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
     constructor(props: BookIndexProps) {
         super(props);
         this.state = { 
-            openDialog: false,
+            openDialogCreate: false,
+            openDialogUpdate: false,
+            id: -1,
             bookData: [],
+            title: "",
+            author: "",
+            cover: "",
+            date: "",
+            booklist: "",
+            owner: "",
         };
     }
-
-fakeData =[{
-    id: 3,
-    title: "Catcher in the Rye",
-    author: "JD Salinger",
-    cover: "www.xyz.com",
-    date: '10/13/2020',
-},
-{
-    id: 3,
-    title: "Harry Potter and the Sorcerer's Stone",
-    author: "JK Rowling",
-    cover: "www.xyz.com",
-    date: '10/13/2020',
-},
-{
-    id: 3,
-    title: "A Deadly Education",
-    author: "Naomi Novik",
-    cover: "www.xyz.com",
-    date: '10/13/2020',
-}]
-
+//FOR BOOKEDIT
+    onUpdateSubmit=()=> {
+            console.log(this.state.bookData)
+            const body: RequestBodyBook = {
+              book: {
+                title: this.state.bookData.title,
+                author: this.state.bookData.author,
+                cover: this.state.bookData.cover,
+                date: this.state.bookData.date,
+                booklist: this.state.bookData.booklist,
+                owner: this.state.bookData.owner,
+              },
+            };
+            let bookHeaders = new Headers();
+            bookHeaders.append("Content-Type", "application/json");
+            bookHeaders.append(
+              "Authorization",
+              this.props.token != null ? this.props.token : ""
+            );
+            const requestOptions = { method: "PUT", headers: bookHeaders , body: JSON.stringify(body)};
+            fetch(Endpoints.authorization.bookUpdate+this.state.bookData.id, requestOptions)
+              .then((res: any) => res.json())
+              .then((json) => this.onLoad());
+          }
+        
+//LOADS THE GET AUTOMATICALLY ON PAGE
     onLoad = () => {
-        console.log(this.props.token);
         let bookHeaders = new Headers();
         bookHeaders.append("Content-Type", "application/json");
         bookHeaders.append(
@@ -63,18 +81,34 @@ componentDidMount(){
     this.onLoad();
 }
 
+updateIndexStateBookData = (value: any) =>{
+      this.setState({bookData: value})
+      console.log(value);
+    };
     render() { 
         return (
             <div>
+<<<<<<< Updated upstream
             <BookEdit token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialog}/> 
             <BookCreate token={this.props.token} openDialog={this.state.openDialog} onLoad={this.onLoad} />
             {this.state.bookData.map((book: ResponseBook) => <BookCard token={this.props.token} author={book.author} title={book.title} cover={book.cover} date={book.date} /> )}
+=======
+            <BookEdit bookData={this.state.bookData} token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialogUpdate} updateIndexStateCardData={this.updateIndexStateBookData} onUpdateSubmit={this.onUpdateSubmit}/> 
+            <BookCreate onLoad={this.onLoad} onCreate={this.onCreate} token={this.props.token} openDialog={this.state.openDialogCreate}/>
+            {this.state.bookData.map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} //booklist={book.booklist} owner={book.owner} 
+            />
+            )};
+>>>>>>> Stashed changes
             </div>
          );
-    }  //create a method to pass info to children
+    }  
     onUpdate = () => {
-        this.setState({openDialog: !this.state.openDialog})
-        console.log(this.state.openDialog);
+        this.setState({openDialogUpdate: !this.state.openDialogUpdate})
+        console.log(this.state.openDialogUpdate);
+    }
+    onCreate = () => {
+      this.setState({openDialogCreate: !this.state.openDialogCreate})
+      console.log(this.state.openDialogCreate)
     }
 }
  
@@ -104,8 +138,3 @@ export interface ResponseBook {
     updatedAt: Date;
     createdAt: Date;
 }
-
-//card needs to know id of book so I need to pass that as a prop, go to Card interface and pass as prop
-
-//need to figure out a way to get the update to toggle the open
-
