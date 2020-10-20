@@ -19,6 +19,7 @@ export interface BookIndexState {
     booklist: number | string;
     date: number| string;
     owner: number | string;
+    cardData: any;
 }
  
 class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
@@ -29,12 +30,21 @@ class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
             openDialogUpdate: false,
             id: -1,
             bookData: [],
+            cardData: {
             title: "",
             author: "",
             cover: "",
             date: "",
             booklist: "",
-            owner: "",
+            owner: ""
+          },
+            title: "",
+            author: "",
+            cover: "",
+            date: "",
+            booklist: "",
+            owner: ""
+
         };
     }
 //FOR BOOKEDIT
@@ -42,12 +52,12 @@ class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
             console.log(this.state.bookData)
             const body: RequestBodyBook = {
               book: {
-                title: this.state.bookData.title,
-                author: this.state.bookData.author,
-                cover: this.state.bookData.cover,
-                date: this.state.bookData.date,
-                booklist: this.state.bookData.booklist,
-                owner: this.state.bookData.owner,
+                title: this.state.cardData.title,
+                author: this.state.cardData.author,
+                cover: this.state.cardData.cover,
+                date: this.state.cardData.date,
+                booklist: this.state.cardData.booklist,
+                owner: this.state.cardData.owner,
               },
             };
             let bookHeaders = new Headers();
@@ -57,7 +67,7 @@ class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
               this.props.token != null ? this.props.token : ""
             );
             const requestOptions = { method: "PUT", headers: bookHeaders , body: JSON.stringify(body)};
-            fetch(Endpoints.authorization.bookUpdate+this.state.bookData.id, requestOptions)
+            fetch(Endpoints.authorization.bookUpdate+this.state.cardData.id, requestOptions)
               .then((res: any) => res.json())
               .then((json) => this.onLoad());
           }
@@ -82,25 +92,21 @@ componentDidMount(){
 }
 
 updateIndexStateBookData = (value: any) =>{
-      this.setState({bookData: value})
+      this.setState({cardData: value})
       console.log(value);
     };
     render() { 
         return (
             <div>
-            {/* <BookEdit token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialog}/> 
-            <BookCreate token={this.props.token} openDialog={this.state.openDialog} onLoad={this.onLoad} />
-            {this.state.bookData.map((book: ResponseBook) => <BookCard token={this.props.token} author={book.author} title={book.title} cover={book.cover} date={book.date} /> )} */}
-            <BookEdit bookData={this.state.bookData} token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialogUpdate} updateIndexStateCardData={this.updateIndexStateBookData} onUpdateSubmit={this.onUpdateSubmit}/> 
+            <BookEdit cardData={this.state.cardData} token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialogUpdate} updateIndexStateCardData={this.updateIndexStateBookData} onUpdateSubmit={this.onUpdateSubmit}/> 
             <BookCreate onLoad={this.onLoad} onCreate={this.onCreate} token={this.props.token} openDialog={this.state.openDialogCreate}/>
-            {this.state.bookData.map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} //booklist={book.booklist} owner={book.owner} 
-            />
+            {this.state.bookData.map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} cards={this.state.bookData}  />
             )};
             </div>
          );
     }  
-    onUpdate = () => {
-        this.setState({openDialogUpdate: !this.state.openDialogUpdate})
+    onUpdate = (card: any) => {
+        this.setState({openDialogUpdate: !this.state.openDialogUpdate, cardData: card})
         console.log(this.state.openDialogUpdate);
     }
     onCreate = () => {
