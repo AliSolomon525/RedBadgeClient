@@ -30,6 +30,7 @@ export interface BookCardProps {
     onUpdateSubmit: any;
     onLoad: any;
     onUpdate: any;
+    cards: any;
 }
  
 export interface BookCardState {
