@@ -88,17 +88,14 @@ updateIndexStateBookData = (value: any) =>{
     render() { 
         return (
             <div>
-<<<<<<< Updated upstream
-            <BookEdit token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialog}/> 
+            {/* <BookEdit token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialog}/> 
             <BookCreate token={this.props.token} openDialog={this.state.openDialog} onLoad={this.onLoad} />
-            {this.state.bookData.map((book: ResponseBook) => <BookCard token={this.props.token} author={book.author} title={book.title} cover={book.cover} date={book.date} /> )}
-=======
+            {this.state.bookData.map((book: ResponseBook) => <BookCard token={this.props.token} author={book.author} title={book.title} cover={book.cover} date={book.date} /> )} */}
             <BookEdit bookData={this.state.bookData} token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialogUpdate} updateIndexStateCardData={this.updateIndexStateBookData} onUpdateSubmit={this.onUpdateSubmit}/> 
             <BookCreate onLoad={this.onLoad} onCreate={this.onCreate} token={this.props.token} openDialog={this.state.openDialogCreate}/>
             {this.state.bookData.map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} //booklist={book.booklist} owner={book.owner} 
             />
             )};
->>>>>>> Stashed changes
             </div>
          );
     }  

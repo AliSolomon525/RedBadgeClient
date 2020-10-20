@@ -45,10 +45,7 @@ export interface BookCreateProps {
     token: string | null;
     openDialog: boolean;
     onLoad: any;
-<<<<<<< Updated upstream
-=======
     onCreate: any;
->>>>>>> Stashed changes
 }
  
 export interface BookCreateState {
@@ -97,13 +94,9 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
         const requestOptions = { method: "POST", headers: bookHeaders, body: JSON.stringify(body)};
         fetch(Endpoints.authorization.bookCreate, requestOptions)
           .then((res: any) => res.json())
-<<<<<<< Updated upstream
-          .then((json: ResponseBook) => this.props.onLoad());
-=======
           .then((json: ResponseBook) => {
             this.props.onLoad()
             this.props.onCreate()});
->>>>>>> Stashed changes
       }
 
 
