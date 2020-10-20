@@ -13,8 +13,8 @@ export interface BookEditProps {
     onUpdate: any;
     updateIndexStateCardData: any;
     onUpdateSubmit: any;
-    bookData: any;
-}
+    cardData: any;
+  }
  
 export interface BookEditState {
     title: string;
@@ -33,24 +33,24 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
     constructor(props: BookEditProps) {
         super(props);
         this.state = { 
-            title: this.props.bookData.title,
-            author: this.props.bookData.author,
-            cover: this.props.bookData.cover,
-            owner: this.props.bookData.owner,
-            booklist: this.props.bookData.booklist,
+            title: this.props.cardData.title,
+            author: this.props.cardData.author,
+            cover: this.props.cardData.cover,
+            owner: this.props.cardData.owner,
+            booklist: this.props.cardData.booklist,
             openDialog: this.props.openDialog,
           };
     }
 
 //TO CHANGE THE TITLE
-  handleChangeTitle =( e:any ) => {
+  handleChangeTitle =(e:any) => {
       let BookObject ={
-          id: this.props.bookData.id,
+          id: this.props.cardData.id,
           title: e.target.value,
-          author: this.props.bookData.author,
-          cover: this.props.bookData.cover,
-          owner: this.props.bookData.owner,
-          booklist: this.props.bookData.booklist,
+          author: this.props.cardData.author,
+          cover: this.props.cardData.cover,
+          owner: this.props.cardData.owner,
+          booklist: this.props.cardData.booklist,
       }
       this.props.updateIndexStateCardData(BookObject)
   }
@@ -58,13 +58,13 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE AUTHOR
   handleChangeAuthor = (e:any) => {
     let BookObject = {
-      id: this.props.bookData.id,
-      title: this.props.bookData.title,
+      id: this.props.cardData.id,
+      title: this.props.cardData.title,
       author: e.target.value,
-      cover: this.props.bookData.cover,
-      date: this.props.bookData.date,
-      owner: this.props.bookData.owner,
-      booklist: this.props.bookData.booklist,
+      cover: this.props.cardData.cover,
+      date: this.props.cardData.date,
+      owner: this.props.cardData.owner,
+      booklist: this.props.cardData.booklist,
     }
     this.props.updateIndexStateCardData(BookObject)
   }
@@ -72,13 +72,13 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE COVER
   handleChangeCover = (e:any) => {
     let BookObject = {
-      id: this.props.bookData.id,
-      title: this.props.bookData.title,
-      author: this.props.bookData.author,
+      id: this.props.cardData.id,
+      title: this.props.cardData.title,
+      author: this.props.cardData.author,
       cover: e.target.value,
-      date: this.props.bookData.date,
-      owner: this.props.bookData.owner,
-      booklist: this.props.bookData.booklist,
+      date: this.props.cardData.date,
+      owner: this.props.cardData.owner,
+      booklist: this.props.cardData.booklist,
     }
     this.props.updateIndexStateCardData(BookObject)
   }
@@ -86,47 +86,23 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE DATE
   handleChangeDate = (e:any) => {
     let BookObject = {
-      id: this.props.bookData.id,
-      title: this.props.bookData.title,
-      author: this.props.bookData.author,
-      cover: this.props.bookData.cover,
+      id: this.props.cardData.id,
+      title: this.props.cardData.title,
+      author: this.props.cardData.author,
+      cover: this.props.cardData.cover,
       date: e.target.value,
-      owner: this.props.bookData.owner,
-      booklist: this.props.bookData.booklist,
+      owner: this.props.cardData.owner,
+      booklist: this.props.cardData.booklist,
     }
     this.props.updateIndexStateCardData(BookObject)
   }
-
-  // onUpdateSumbit() {
-  //       const body: RequestBodyBook = {
-  //         book: {
-  //           date: this.state.bookData.date,
-  //           title: this.state.bookData.title,
-  //           author: this.state.bookData.author,
-  //           cover: this.state.bookData.cover,
-  //           owner: this.state.bookData.owner,
-  //           booklist: this.state.bookData.booklist
-  //         },
-  //       };
-  //       let bookHeaders = new Headers();
-  //       bookHeaders.append("Content-Type", "application/json");
-  //       bookHeaders.append(
-  //         "Authorization",
-  //         this.props.token != null ? this.props.token : ""
-  //       );
-  //       const requestOptions = { method: "PUT", headers: bookHeaders };
-  //       fetch(Endpoints.authorization.bookUpdate, requestOptions)
-  //         .then((res: any) => res.json())
-  //         .then((json: ResponseBook) => console.log(json));
-  //     }
-
 
     render() { 
         return ( 
             <div>
               <div>
           <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Update</DialogTitle>
+            <DialogTitle id="form-dialog-title">Update Book Information</DialogTitle>
             <DialogContent>
               <DialogContentText>
               </DialogContentText>
@@ -137,7 +113,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
                 type="string"
                 fullWidth
                 onChange={(e) => this.handleChangeTitle(e)}
-                value={this.props.bookData != undefined ?  this.props.bookData.title: ""}
+                value={this.props.cardData != undefined ?  this.props.cardData.title: ""}
               />
               <TextField
                 autoFocus
@@ -146,13 +122,15 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
                 type="author"
                 fullWidth
                 onChange={(e) => this.handleChangeAuthor(e)}
-                value={this.props.bookData != undefined ?  this.props.bookData.author: ""}
+                value={this.props.cardData != undefined ?  this.props.cardData.author: ""}
               />
-               <TextField
+                <TextField
                 autoFocus
                 margin="dense"
                 type="date"
                 fullWidth
+                onChange={(e) => this.handleChangeDate(e)}
+                value={this.props.cardData != undefined ?  this.props.cardData.date: Date}
               />
                 <TextField
                 autoFocus
@@ -161,23 +139,14 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
                 type="cover"
                 fullWidth
                 onChange={(e) => this.handleChangeCover(e)}
-                value={this.props.bookData != undefined ?  this.props.bookData.cover: ""}
-              />
-                <TextField
-                autoFocus
-                margin="dense"
-                label="Date"
-                type="date"
-                fullWidth
-                onChange={(e) => this.handleChangeDate(e)}
-                value={this.props.bookData != undefined ?  this.props.bookData.date: Date}
+                value={this.props.cardData != undefined ?  this.props.cardData.cover: ""}
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={()=> this.props.onUpdate()} color="primary">
+              <Button onClick={()=> {this.props.onUpdate(); this.props.onUpdateSubmit()}} color="primary">
                 Update Book
               </Button>
-              <Button color="primary">
+              <Button color="primary" onClick={() => this.props.onUpdate()}>
                 Cancel
               </Button>
             </DialogActions>
