@@ -28,6 +28,7 @@ const useStyles =(theme: Theme) => ({
     flexWrap: "wrap",
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -85,9 +86,9 @@ class BookListIndex extends React.Component<
   render() {
     const { classes }: any = this.props;
     return (
-      <div>
+      <div className="wrapper2">
         <Grid container spacing={0}>
-          <Grid item xs={12} md={6}>
+          <Grid item sm={4}>
             <form className={classes.container} noValidate>
               <TextField
                 id="listname"
@@ -98,7 +99,7 @@ class BookListIndex extends React.Component<
               />
             </form>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item sm={4}>
             <form className={classes.container} noValidate>
               <TextField
                 id="listdescription"
@@ -107,22 +108,22 @@ class BookListIndex extends React.Component<
                 type="listdescription"
                 onChange={(e) => this.setState({ listdescription: e.target.value })}
               />
-            </form>
-          </Grid>
-        </Grid>
-        <br/>
-        <Button
-        // className={classes.but}
-        // type="submit"
-        // variant="contained"
+              </form>
+            </Grid>
+            <Grid item sm={4}>
+            <form className={classes.container} noValidate>
+          <Button
+          style={{marginTop: "0.8em"}}
+           variant="outlined"
         // size="medium"
         // textAlign="center"
         onClick={(e)=>this.onSubmit(e)}
       >
         Create a Booklist
       </Button>
-
-
+      </form>
+      </Grid>
+     </Grid>
       </div>
     );
   }

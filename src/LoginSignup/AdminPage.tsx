@@ -47,7 +47,6 @@ class AdminPage extends React.Component<AdminPageProps, AdminPageState> {
         username: "",
       };};
 
-
     deleteUser(id:number){
         console.log(this.props.token)
         let AdminPageHeaders = new Headers();

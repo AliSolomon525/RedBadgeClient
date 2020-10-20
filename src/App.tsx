@@ -16,6 +16,7 @@ import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import AdminPageIndex from "./LoginSignup/AdminPageIndex";
+import banner from "./assets/banner.png";
 
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
@@ -51,7 +52,7 @@ console.log(token);
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
+        return hideBookIndex==false ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
       }
     } else {
         return (<div>
@@ -69,6 +70,7 @@ console.log(token);
         <Nav clickLogout={clearToken}/>
       </div>
       <Switch>
+        <GuardedRoute path="/adminsignup"><SignupAdmin updateToken={updateToken}/></GuardedRoute>
         <GuardedRoute path="/about"><About /></GuardedRoute>
         <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
       <GuardedRoute path="/">

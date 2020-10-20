@@ -76,7 +76,6 @@ class SignupUser extends React.Component<SignupUserProps, SignupUserState> {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          {/* <h2 style={{ textAlign: "center" }}>Sign Up User</h2> */}
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="names">
               <TextField
