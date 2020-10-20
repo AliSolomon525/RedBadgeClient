@@ -30,12 +30,28 @@ function App() {
     }
 console.log(token);
   }, []);
+
+//For The Books Show More in BookList Table
+//   const [showBooks, setShowBooks] = useState(false);
+// useEffect(()=>{
+//   setShowBooks();
+// },[]);
+// function handleClick(){
+//   if (showBooks){
+//     setShowBooks(false);
+//   } else {
+//     setShowBooks(true);
+//   }
+// }
+
+
   const updateToken = (newToken: string, isAdmin = "false") => {
     localStorage.setItem("token", newToken);
     localStorage.setItem("isAdmin", isAdmin);
     setSessionToken(newToken);
     console.log(sessionToken);
   };
+
   const clearToken = () => {
     localStorage.clear();
     setSessionToken("");
@@ -51,7 +67,7 @@ console.log(token);
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
+        return hideBookIndex==false ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
       }
     } else {
         return (<div>
@@ -73,6 +89,7 @@ console.log(token);
         <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
       <GuardedRoute path="/">
       {protectedViews()}
+      <GuardedRoute  path="/BookIndex"><BookIndex token={sessionToken} /></GuardedRoute>
       </GuardedRoute>
       <GuardedRoute path="/banner">
       <Banner/>

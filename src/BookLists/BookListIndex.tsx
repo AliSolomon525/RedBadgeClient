@@ -6,7 +6,7 @@ import { Endpoints } from "../Components/Endpoints";
 
 export interface BookListIndexProps {
   token: string | null;
-  //updateToken: any;
+  // handleClick: any;
 }
 
 export interface BookListIndexState {
@@ -84,6 +84,10 @@ updateIndexStateRowData = (value: any) =>{
       <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token} onLoad={this.onLoad}/>
     </div>;
   }
+
+
+
+
 }
 export default BookListIndex;
 //requests & responses go down here
