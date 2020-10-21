@@ -51,7 +51,7 @@ console.log(token);
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
+        return <BookListIndex token={sessionToken} />
       }
     } else {
         return (<div>

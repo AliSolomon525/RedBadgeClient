@@ -6,6 +6,7 @@ import { Endpoints } from '../Components/Endpoints';
 
 export interface BookIndexProps {
     token: string | null;
+    booklistId: number;
 }
  
 export interface BookIndexState {
@@ -99,8 +100,10 @@ updateIndexStateBookData = (value: any) =>{
         return (
             <div>
             <BookEdit cardData={this.state.cardData} token={this.props.token} onUpdate={this.onUpdate} openDialog={this.state.openDialogUpdate} updateIndexStateCardData={this.updateIndexStateBookData} onUpdateSubmit={this.onUpdateSubmit}/> 
-            <BookCreate onLoad={this.onLoad} onCreate={this.onCreate} token={this.props.token} openDialog={this.state.openDialogCreate}/>
-            {this.state.bookData.map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} cards={this.state.bookData}  />
+
+            <BookCreate booklistId={this.props.booklistId} onLoad={this.onLoad} onCreate={this.onCreate} token={this.props.token} openDialog={this.state.openDialogCreate}/>
+
+            {this.state.bookData.filter((book: ResponseBook)=> book.booklist==this.props.booklistId).map((book: ResponseBook) => <BookCard onLoad={this.onLoad} onUpdate={this.onUpdate} onUpdateSubmit={this.onUpdateSubmit} token={this.props.token} author={book.author} title={book.title} cover={book.cover} id={this.state.id} date={book.date} card={book}/>
             )};
             </div>
          );

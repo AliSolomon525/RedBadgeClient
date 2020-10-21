@@ -46,6 +46,7 @@ export interface BookCreateProps {
     openDialog: boolean;
     onLoad: any;
     onCreate: any;
+    booklistId: number;
 }
  
 export interface BookCreateState {
@@ -54,7 +55,6 @@ export interface BookCreateState {
     author: string;
     cover: string;
     owner: number | string;
-    booklist: number | string;
 }
 
 
@@ -70,7 +70,6 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             author: "",
             cover: "",
             owner: "",
-            booklist: 2,
          };
     }
 
@@ -82,7 +81,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             author: this.state.author,
             cover: this.state.cover,
             owner: this.state.owner,
-            booklist: this.state.booklist
+            booklist: this.props.booklistId
           },
         };
         let bookHeaders = new Headers();
@@ -98,7 +97,6 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             this.props.onLoad()
             this.props.onCreate()});
       }
-
 
     render() { 
         return ( 
@@ -133,14 +131,6 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 type="date"
                 fullWidth
                 onChange={(e) => this.setState({ date: e.target.value})}
-              />
-                <TextField
-                autoFocus
-                margin="dense"
-                label="Cover"
-                type="cover"
-                fullWidth
-                onChange={(e) => this.setState({ cover: e.target.value })}
               />
             </DialogContent>
             <DialogActions>

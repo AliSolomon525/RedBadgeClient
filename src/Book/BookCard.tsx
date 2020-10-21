@@ -30,7 +30,7 @@ export interface BookCardProps {
     onUpdateSubmit: any;
     onLoad: any;
     onUpdate: any;
-    cards: any;
+    card: any;
 }
  
 export interface BookCardState {
@@ -75,12 +75,6 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
     return (
       <div>
         <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={this.props.cover}
-            title="Book Cover"
-          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.title}
@@ -92,14 +86,13 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
               {this.props.date}
             </Typography>
           </CardContent>
-        </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => {this.props.onUpdate()}}>
+          <Button size="small" color="primary" onClick={() => {this.props.onUpdate(this.props.card)}}>
             Update
           </Button>
-          {/* <Button size="small" color="primary" onClick={() => {this.deleteBook(book.id)}}>
+          <Button size="small" color="primary" onClick={() => {this.deleteBook(this.props.card.id)}}>
             Delete
-          </Button> */}
+          </Button>
         </CardActions>
       </Card>
       </div>
