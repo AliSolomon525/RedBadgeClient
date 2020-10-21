@@ -51,7 +51,7 @@ console.log(token);
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
       } else {
-        return hideBookIndex==true ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
+        return hideBookIndex==false ? <BookListIndex token={sessionToken} /> : <BookIndex token={sessionToken}/>
       }
     } else {
         return (<div>
@@ -74,6 +74,7 @@ console.log(token);
       <GuardedRoute path="/">
       {protectedViews()}
       </GuardedRoute>
+      <GuardedRoute  path="/BookIndex"><BookIndex token={sessionToken}/></GuardedRoute>
       <GuardedRoute path="/banner">
       <Banner/>
       </GuardedRoute>

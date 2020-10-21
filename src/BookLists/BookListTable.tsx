@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/styles';
 import Button from "@material-ui/core/Button";
 import {Endpoints} from "../Components/Endpoints";
+import { Link } from "react-router-dom";
+import BookIndex from '../Book/BookIndex';
 
 const useStyles = makeStyles({
     table: {
@@ -88,8 +90,8 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
                 {row.listdescription}
               </TableCell>
 
-            <TableCell><Button>Books</Button></TableCell>
-            <TableCell><Button onClick={()=>{this.props.onUpdate(row)}}>Update</Button></TableCell>
+              <TableCell><Link to="/BookIndex"> Book Page</Link></TableCell>            
+              <TableCell><Button onClick={()=>{this.props.onUpdate(row)}}>Update</Button></TableCell>
             <TableCell><Button onClick={()=>this.deleteBookList(row.id)}>Delete</Button></TableCell>
             </TableRow>
           ))}
