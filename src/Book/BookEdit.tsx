@@ -69,19 +69,6 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
     this.props.updateIndexStateCardData(BookObject)
   }
 
-  //TO CHANGE THE COVER
-  handleChangeCover = (e:any) => {
-    let BookObject = {
-      // id: this.props.cardData.id,
-      title: this.props.cardData.title,
-      author: this.props.cardData.author,
-      cover: e.target.value,
-      date: this.props.cardData.date,
-      owner: this.props.cardData.owner,
-      booklist: this.props.cardData.booklist,
-    }
-    this.props.updateIndexStateCardData(BookObject)
-  }
 
   //TO CHANGE THE DATE
   handleChangeDate = (e:any) => {
@@ -132,15 +119,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
                 onChange={(e) => this.handleChangeDate(e)}
                 value={this.props.cardData != undefined ?  this.props.cardData.date: Date}
               />
-                <TextField
-                autoFocus
-                margin="dense"
-                label="Cover"
-                type="cover"
-                fullWidth
-                onChange={(e) => this.handleChangeCover(e)}
-                value={this.props.cardData != undefined ?  this.props.cardData.cover: ""}
-              />
+    
             </DialogContent>
             <DialogActions>
               <Button onClick={()=> {this.props.onUpdate(); this.props.onUpdateSubmit()}} color="primary">
