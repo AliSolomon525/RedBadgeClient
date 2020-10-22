@@ -14,7 +14,9 @@ export interface BookListIndexState {
   listdescription: string;
   openDialoge: boolean;
   bookListData: any;
-   rowData: any;}
+  rowData: any;
+
+  }
    class BookListIndex extends React.Component<
   BookListIndexProps,
   BookListIndexState

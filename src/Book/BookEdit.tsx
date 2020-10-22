@@ -45,7 +45,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
 //TO CHANGE THE TITLE
   handleChangeTitle =(e:any) => {
       let BookObject ={
-          id: this.props.cardData.id,
+          // id: this.props.cardData.id,
           title: e.target.value,
           author: this.props.cardData.author,
           cover: this.props.cardData.cover,
@@ -58,7 +58,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE AUTHOR
   handleChangeAuthor = (e:any) => {
     let BookObject = {
-      id: this.props.cardData.id,
+      // id: this.props.cardData.id,
       title: this.props.cardData.title,
       author: e.target.value,
       cover: this.props.cardData.cover,
@@ -69,24 +69,11 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
     this.props.updateIndexStateCardData(BookObject)
   }
 
-  //TO CHANGE THE COVER
-  handleChangeCover = (e:any) => {
-    let BookObject = {
-      id: this.props.cardData.id,
-      title: this.props.cardData.title,
-      author: this.props.cardData.author,
-      cover: e.target.value,
-      date: this.props.cardData.date,
-      owner: this.props.cardData.owner,
-      booklist: this.props.cardData.booklist,
-    }
-    this.props.updateIndexStateCardData(BookObject)
-  }
 
   //TO CHANGE THE DATE
   handleChangeDate = (e:any) => {
     let BookObject = {
-      id: this.props.cardData.id,
+      // id: this.props.cardData.id,
       title: this.props.cardData.title,
       author: this.props.cardData.author,
       cover: this.props.cardData.cover,
@@ -132,15 +119,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
                 onChange={(e) => this.handleChangeDate(e)}
                 value={this.props.cardData != undefined ?  this.props.cardData.date: Date}
               />
-                <TextField
-                autoFocus
-                margin="dense"
-                label="Cover"
-                type="cover"
-                fullWidth
-                onChange={(e) => this.handleChangeCover(e)}
-                value={this.props.cardData != undefined ?  this.props.cardData.cover: ""}
-              />
+    
             </DialogContent>
             <DialogActions>
               <Button onClick={()=> {this.props.onUpdate(); this.props.onUpdateSubmit()}} color="primary">

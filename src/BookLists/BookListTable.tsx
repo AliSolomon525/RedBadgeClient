@@ -11,8 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/styles';
 import Button from "@material-ui/core/Button";
 import {Endpoints} from "../Components/Endpoints";
-import BookIndex from '../Book/BookIndex';
 import { Link } from "react-router-dom";
+import BookIndex from '../Book/BookIndex';
 
 const useStyles = makeStyles({
     table: {
@@ -36,6 +36,7 @@ export interface BookListTableProps {
 export interface BookListTableState {
   listname: string;
   listdescription: string;
+  booklistId: number;
 }
 
 class BookListTable extends React.Component<BookListTableProps, BookListTableState> {
@@ -45,8 +46,11 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
         this.state = { 
           listname: "",
           listdescription: "",
+          booklistId: 0,
          };
     }
+showBookCards = (row:any)=>{console.log(row); this.setState({booklistId: row.id})}
+
 
     //method to delete books lists from table button
     deleteBookList(id:number){
@@ -90,16 +94,16 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
               <TableCell component="th" scope="row">
                 {row.listdescription}
               </TableCell>
-          
-            <TableCell><Link to="/BookIndex">Book Page</Link></TableCell>
-            <TableCell><Button onClick={()=>{this.props.onUpdate(row)}}>Update</Button></TableCell>
+
+              <TableCell><Button onClick={() => this.showBookCards(row)}>View and Add Books</Button></TableCell>            
+              <TableCell><Button onClick={()=>{this.props.onUpdate(row)}}>Update</Button></TableCell>
             <TableCell><Button onClick={()=>this.deleteBookList(row.id)}>Delete</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-                
+    <BookIndex token={this.props.token} booklistId={this.state.booklistId} />    
             </div>
 
          );
