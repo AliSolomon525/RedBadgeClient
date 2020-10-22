@@ -3,6 +3,7 @@ import BookCreate from './BookCreate';
 import BookCard from './BookCard';
 import BookEdit from './BookEdit'
 import { Endpoints } from '../Components/Endpoints';
+import { NotificationConfirmationNumber } from 'material-ui/svg-icons';
 
 export interface BookIndexProps {
     token: string | null;
@@ -24,20 +25,21 @@ export interface BookIndexState {
 }
  
 class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
+  cardData: any;
     constructor(props: BookIndexProps) {
         super(props);
         this.state = { 
             openDialogCreate: false,
             openDialogUpdate: false,
-            id: -1,
             bookData: [],
+            id: -1,
             cardData: {
             title: "",
             author: "",
             cover: "",
             date: "",
             booklist: "",
-            owner: ""
+            owner: "",
           },
             title: "",
             author: "",
