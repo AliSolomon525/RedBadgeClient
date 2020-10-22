@@ -17,6 +17,7 @@ export interface BookEditProps {
   }
  
 export interface BookEditState {
+    id: any; 
     title: string;
     author: string;
     cover: string;
@@ -33,6 +34,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
     constructor(props: BookEditProps) {
         super(props);
         this.state = { 
+            id: this.props.cardData.id,
             title: this.props.cardData.title,
             author: this.props.cardData.author,
             cover: this.props.cardData.cover,
@@ -45,7 +47,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
 //TO CHANGE THE TITLE
   handleChangeTitle =(e:any) => {
       let BookObject ={
-          // id: this.props.cardData.id,
+          id: this.props.cardData.id,
           title: e.target.value,
           author: this.props.cardData.author,
           cover: this.props.cardData.cover,
@@ -58,7 +60,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE AUTHOR
   handleChangeAuthor = (e:any) => {
     let BookObject = {
-      // id: this.props.cardData.id,
+      id: this.props.cardData.id,
       title: this.props.cardData.title,
       author: e.target.value,
       cover: this.props.cardData.cover,
@@ -73,7 +75,7 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
   //TO CHANGE THE DATE
   handleChangeDate = (e:any) => {
     let BookObject = {
-      // id: this.props.cardData.id,
+      id: this.props.cardData.id,
       title: this.props.cardData.title,
       author: this.props.cardData.author,
       cover: this.props.cardData.cover,
