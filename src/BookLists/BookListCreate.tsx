@@ -87,6 +87,8 @@ class BookListIndex extends React.Component<
     const { classes }: any = this.props;
     return (
       <div className="wrapper2">
+        <h2 className="about-title">Welcome To Your Dashboard!</h2>
+        <h3>Create a Book List and Add A Book or Two!</h3>
         <Grid container spacing={0}>
           <Grid item sm={4}>
             <form className={classes.container} noValidate>

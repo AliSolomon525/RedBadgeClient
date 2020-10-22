@@ -101,8 +101,8 @@ class About extends React.Component<AboutProps, AboutState> {
                   <CardContent style={{backgroundColor:"#F0EFEB", fontFamily: "Lucida Sans Unicode"}}>
                     <Typography>
                       Co-Founder: Lauren <br />
-                      Favorite Author: UNKNOWN <br/>
-                      Favorite Genre: UNKNOWN
+                      Favorite Author: Robert Greene <br/>
+                      Favorite Genre: Self-Improvement
                     </Typography>
                   </CardContent>
               </Card>

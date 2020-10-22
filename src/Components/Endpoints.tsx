@@ -3,7 +3,7 @@ export const Endpoints = {
     signupUser: `http://localhost:3000/api/registerUser`,
     loginUser: `http://localhost:3000/api/loginUser`,
     getUserById: `http://localhost:3000/api/userInfo/`,
-    getAllUsers: `http://localhost:3000/api/userInfo`,
+    getAllUsers: `http://localhost:3000/api/userInfo/`,
     deleteUser: `http://localhost:3000/api/deleteUser/`,
     signupAdmin: `http://localhost:3000/api/registerAdmin`,
     loginAdmin: `http://localhost:3000/api/loginAdmin`,

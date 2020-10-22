@@ -19,6 +19,7 @@ const useStyles =(theme: Theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     // color: theme.palette.text.secondary,
+    paddingBottom: theme.spacing(1),
   },
   title: {
     textAlign: "center",
@@ -28,11 +29,13 @@ const useStyles =(theme: Theme) => ({
     flexWrap: "wrap",
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200,
+    paddingBottom: theme.spacing(1),
   },
   but: {
     marginLeft: theme.spacing(1),
@@ -81,7 +84,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             author: this.state.author,
             cover: this.state.cover,
             owner: this.state.owner,
-            booklist: this.props.booklistId
+            booklist: this.props.booklistId,
           },
         };
         let bookHeaders = new Headers();
@@ -101,14 +104,19 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
     render() { 
         return ( 
           <div>
-          <Button variant="outlined" color="primary" onClick={this.props.onCreate}  >
+          <div className="container4">
+
+          <Button style={{marginTop: "8px", backgroundColor:"#ffe8d6"}} variant="outlined" onClick={this.props.onCreate}>
             Add a Book
           </Button>
-          <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">
+
+          </div>
+          <div className="card">
+          <Dialog className="card" open={this.props.openDialog} >
             <DialogTitle id="form-dialog-title">Add a Book</DialogTitle>
             <DialogContent>
-              <DialogContentText>
-              </DialogContentText>
+              {/* <DialogContentText>
+              </DialogContentText> */}
               <TextField
                 autoFocus
                 margin="dense"
@@ -133,19 +141,21 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 onChange={(e) => this.setState({ date: e.target.value})}
               />
             </DialogContent>
-            <DialogActions>
-              <Button onClick={(e)=>this.onSubmit(e)} color="primary">
+            <DialogActions style={{margin: "auto"}}>
+              <Button onClick={(e)=>this.onSubmit(e)}>
                 Add Book
               </Button>
-              <Button onClick={this.props.onCreate} color="primary">
+              <Button onClick={this.props.onCreate}>
                 Cancel
               </Button>
             </DialogActions>
           </Dialog>
+          </div>
+          
         </div>
         )}
 }
- 
+
 export default BookCreate;
 
 export interface RequestBodyBook {
