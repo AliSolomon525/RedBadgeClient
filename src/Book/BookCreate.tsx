@@ -104,7 +104,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
     render() { 
         return ( 
           <div>
-       {this.props.booklistId != 0 && <Button variant="outlined" color="primary" onClick={this.props.onCreate}  >
+       {this.props.booklistId != 0 && <Button variant="outlined" onClick={this.props.onCreate}  >
             Add a Book
           </Button>}
           <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">

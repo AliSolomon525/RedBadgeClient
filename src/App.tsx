@@ -16,8 +16,6 @@ import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import AdminPageIndex from "./LoginSignup/AdminPageIndex";
-import banner from "./assets/banner.png";
-
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
   const [hideBookIndex, setHideBookIndex]= useState<boolean>(false);
@@ -41,7 +39,6 @@ console.log(token);
     localStorage.clear();
     setSessionToken("");
   };
-
   const protectedViews = () => {
     // return sessionToken === localStorage.getItem("token") ? (
     //   <BookIndex  token={sessionToken} />
@@ -51,6 +48,9 @@ console.log(token);
     if (sessionToken === localStorage.getItem("token")) {
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
+      } else {
+        return <BookListIndex token={sessionToken} />
+      }
     } else {
         return (<div>
         <Auth token={sessionToken} updateToken={updateToken} />
@@ -58,7 +58,6 @@ console.log(token);
       </div>)
     }
   };
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -67,7 +66,6 @@ console.log(token);
         <Nav clickLogout={clearToken}/>
       </div>
       <Switch>
-        <GuardedRoute path="/adminsignup"><SignupAdmin updateToken={updateToken}/></GuardedRoute>
         <GuardedRoute path="/about"><About /></GuardedRoute>
         <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
       <GuardedRoute path="/">
@@ -82,5 +80,4 @@ console.log(token);
     </div>
   )
 }
-
 export default App;
