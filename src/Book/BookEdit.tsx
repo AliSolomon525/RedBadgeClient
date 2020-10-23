@@ -124,10 +124,10 @@ class BookEdit extends React.Component<BookEditProps, BookEditState> {
     
             </DialogContent>
             <DialogActions>
-              <Button onClick={()=> {this.props.onUpdate(); this.props.onUpdateSubmit()}} color="primary">
+              <Button onClick={()=> {this.props.onUpdate(); this.props.onUpdateSubmit()}}>
                 Update Book
               </Button>
-              <Button color="primary" onClick={() => this.props.onUpdate()}>
+              <Button onClick={() => this.props.onUpdate()}>
                 Cancel
               </Button>
             </DialogActions>

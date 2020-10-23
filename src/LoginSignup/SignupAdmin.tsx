@@ -54,7 +54,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
       .then((response) => response.json())
       .then((data: SignupAdminResponse) => {
         console.log(data);
-        this.props.updateToken(data.sessionToken);
+        this.props.updateToken(data.sessionToken, data.isAdmin);
         this.setState({
           firstName: "",
           lastName: "",
@@ -154,6 +154,7 @@ export interface SignupAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+  isAdmin: boolean;
 }
 
 export interface Admin {

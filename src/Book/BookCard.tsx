@@ -79,7 +79,7 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.title}
             </Typography>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h5" component="h5" style={{fontSize:"18px"}}>
               {this.props.author}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
