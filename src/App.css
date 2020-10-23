@@ -19,6 +19,17 @@
   text-align: center;
 }
 
+.wrapper2 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  padding-top: 5px;
+  background-color: #ddbea9;
+}
+
 .form-wrapper {
   align-items: center;
   display: center;
@@ -113,4 +124,34 @@
 
 .about-footer {
   background-color: #a5a58d;
+}
+
+.wrapper3 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  padding-top: 5px;
+  background-color: #ddbea9;
+}
+
+.container4 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.wrapper4 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  padding-top: 5px;
+  background-color: #ddbea9;
 }

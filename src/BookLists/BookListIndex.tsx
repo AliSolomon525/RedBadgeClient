@@ -35,7 +35,7 @@ export interface BookListIndexState {
       //fetch & store in state variable like booklistdata
       //next, pass that down to the child component
       //collect on this page the booklistdata 
-    };
+    }
   }
   onUpDateSubmit=()=> {console.log(this.state.rowData)
     const body: RequestBodyBookListUpdate = {
@@ -84,7 +84,7 @@ updateIndexStateRowData = (value: any) =>{
       <BookListEdit rowData={this.state.rowData} updateIndexStateRowData={this.updateIndexStateRowData} onUpdate={this.onUpdate} token={this.props.token} openDialoge={this.state.openDialoge} onUpDateSubmit={this.onUpDateSubmit}/>
       <BookListCreate token={this.props.token} onLoad={this.onLoad}/>
       <BookListTable onUpdate={this.onUpdate} rows={this.state.bookListData} token={this.props.token} onLoad={this.onLoad}/>
-    </div>;
+    </div>
   }
 }
 export default BookListIndex;

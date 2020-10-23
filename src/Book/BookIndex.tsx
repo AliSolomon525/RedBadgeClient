@@ -126,7 +126,7 @@ class BookIndex extends React.Component<BookIndexProps, BookIndexState> {
         const requestOptions = { method: "GET", headers: bookHeaders };
         fetch(Endpoints.authorization.getAllBooks, requestOptions)
           .then((res: any) => res.json())
-          .then((json: ResponseBook) => {console.log(json)
+          .then((json: ResponseBook) => {console.log(json);
         this.setState({bookData: json})});
       }
 
@@ -183,7 +183,7 @@ updateIndexStateBookData = (value: any) =>{
     }
     onCreate = () => {
       this.setState({openDialogCreate: !this.state.openDialogCreate})
-      console.log(this.state.openDialogCreate)
+      console.log(this.state.openDialogCreate);
     }
     }
 

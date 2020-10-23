@@ -16,7 +16,6 @@ import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import AdminPageIndex from "./LoginSignup/AdminPageIndex";
-
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
   const [hideBookIndex, setHideBookIndex]= useState<boolean>(false);
@@ -40,7 +39,6 @@ console.log(token);
     localStorage.clear();
     setSessionToken("");
   };
-
   const protectedViews = () => {
     // return sessionToken === localStorage.getItem("token") ? (
     //   <BookIndex  token={sessionToken} />
@@ -60,7 +58,6 @@ console.log(token);
       </div>)
     }
   };
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -83,5 +80,4 @@ console.log(token);
     </div>
   )
 }
-
 export default App;

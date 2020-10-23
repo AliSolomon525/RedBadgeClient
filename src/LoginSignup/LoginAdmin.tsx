@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Banner from "../Components/Banner";
 
 export interface LoginAdminProps {
   updateToken: any;

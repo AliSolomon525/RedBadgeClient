@@ -47,7 +47,6 @@ class AdminPage extends React.Component<AdminPageProps, AdminPageState> {
         username: "",
       };};
 
-
     deleteUser(id:number){
         console.log(this.props.token)
         let AdminPageHeaders = new Headers();
@@ -70,30 +69,33 @@ class AdminPage extends React.Component<AdminPageProps, AdminPageState> {
               <TableHead>
                    {/* the column headers */}
                 <TableRow>
-                  <TableCell>First Name</TableCell>
-                  <TableCell>Last Name</TableCell>
-                  <TableCell>Username</TableCell>
-                  <TableCell>Delete User</TableCell>
+                  <TableCell style={{textAlign: "center", fontWeight: "bold", fontSize: "18px", font: "Lucida Sans Unicode"}}>First Name</TableCell>
+                  <TableCell style={{textAlign: "center", fontWeight: "bold", fontSize: "18px", font: "Lucida Sans Unicode"}}>Last Name</TableCell>
+                  <TableCell style={{textAlign: "center", fontWeight: "bold", fontSize: "18px", font: "Lucida Sans Unicode"}}>Username</TableCell>
+                  <TableCell style={{textAlign: "center", fontWeight: "bold", fontSize: "18px", font: "Lucida Sans Unicode"}}>Delete User</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {this.props.rows.map((row:any,index:number) => (
                   <TableRow key={index}> 
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" style={{textAlign: "center"}}>
                       {row.firstName}
-                    </TableCell><TableCell component="th" scope="row">
+                    </TableCell>
+                    <TableCell component="th" scope="row" style={{textAlign: "center"}}>
                       {row.lastName}
                     </TableCell>
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" style={{textAlign: "center"}}>
                       {row.username}
                     </TableCell>
                     
-                  <TableCell><Button onClick={()=>this.deleteUser(row.id)}>Delete</Button></TableCell>
+                  <TableCell style={{textAlign: "center"}}><Button variant="outlined" onClick={()=>this.deleteUser(row.id)}>Delete</Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer></div> );
+          </TableContainer>
+          <div className="about-footer">&copy; BookWyrm BookClub 2020</div>
+          </div> );
     }
 }
  

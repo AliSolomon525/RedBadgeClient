@@ -12,6 +12,7 @@ import { Endpoints } from '../Components/Endpoints';
 const useStyles = (theme: Theme) => ({
     root: {
       maxWidth: 345,
+      justifyContent: "center",
     },
     media: {
       height: 140,
@@ -72,9 +73,9 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
     render() { 
         const { classes }: any = this.props;
     return (
-      <div>
-        <Card className={classes.root}>
-          <CardContent>
+      <div className="container3">
+        <Card className="card" style={{margin: "0.5em", display: "row"}}>
+          <CardContent style={{backgroundColor:"#ffe8d6"}}>
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.title}
             </Typography>
@@ -85,11 +86,11 @@ class BookCard extends React.Component<BookCardProps, BookCardState> {
               {this.props.date}
             </Typography>
           </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" onClick={() => {this.props.onUpdate(this.props.card)}}>
+        <CardActions style={{justifyContent: "center"}}>
+          <Button size="small" variant="outlined" onClick={() => {this.props.onUpdate(this.props.card)}}>
             Update
           </Button>
-          <Button size="small" color="primary" onClick={() => {this.deleteBook(this.props.card.id)}}>
+          <Button size="small" variant="outlined" onClick={() => {this.deleteBook(this.props.card.id)}}>
             Delete
           </Button>
         </CardActions>
