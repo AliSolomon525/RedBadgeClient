@@ -9,18 +9,29 @@ import Banner from "./Components/Banner";
 import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
-
+import BookIndex from "./Book/BookIndex";
+import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, Redirect } from "react-router-dom";
+import About from "./Components/About";
+import BookClub from "./Components/BookClub";
+import AdminPage from "./LoginSignup/AdminPage";
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import AdminPageIndex from "./LoginSignup/AdminPageIndex";
 function App() {
   const [token, setToken] = useState<any>(); //strong types the use state; this is casting a type
+  const [hideBookIndex, setHideBookIndex]= useState<boolean>(false);
   //const [updateToken, setUpdate
   const [sessionToken, setSessionToken] = useState<string | null>("");
+  // const [open, setOpen] = useState<boolean>(false);
   useEffect(() => {
-    if (localStorage.getItem(token)) {
-      setSessionToken(localStorage.getItem(token));
+    let token = localStorage.getItem("token");
+    if (token) {
+      setSessionToken(token);
     }
+console.log(token);
   }, []);
-  const updateToken = (newToken: string) => {
+  const updateToken = (newToken: string, isAdmin = "false") => {
     localStorage.setItem("token", newToken);
+    localStorage.setItem("isAdmin", isAdmin);
     setSessionToken(newToken);
     console.log(sessionToken);
   };
@@ -28,33 +39,50 @@ function App() {
     localStorage.clear();
     setSessionToken("");
   };
-
   const protectedViews = () => {
-    return sessionToken === localStorage.getItem("token") ? (
-      <BookListIndex token={sessionToken} />
-    ) : (
-      <Auth token={sessionToken} updateToken={updateToken} />
-    );
+    // return sessionToken === localStorage.getItem("token") ? (
+    //   <BookIndex  token={sessionToken} />
+    // ) : (
+    //   <div>
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (sessionToken === localStorage.getItem("token")) {
+      if (isAdmin === "true") {
+        return <AdminPageIndex token={sessionToken}/>
+      } else {
+        return <BookListIndex token={sessionToken} />
+      }
+    } else {
+        return (<div>
+        <Auth token={sessionToken} updateToken={updateToken} />
+        <Banner />
+      </div>)
+    }
   };
-
   return (
     <div className="App">
-
-      <Nav />
-      {/* <Auth token={sessionToken} updateToken={updateToken} />
-
-      <div className="container">
-        <SignupAdmin updateToken={updateToken} />
-        <SignupUser updateToken={updateToken} />
+      <BrowserRouter>
+      <GuardProvider>
+      <div>
+        <Nav clickLogout={clearToken}/>
       </div>
-      <div className="container2">
-        <LoginAdmin updateToken={updateToken} />
-        <LoginUser updateToken={updateToken} />
-      </div> */}
+      <Switch>
+        <GuardedRoute path="/adminsignup">
+         {sessionToken ? <Redirect to="/adminpage" /> : <SignupAdmin updateToken={updateToken} />} </GuardedRoute>
+        <GuardedRoute path="/about"><About /></GuardedRoute>
+        <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
+      <GuardedRoute path="/">
       {protectedViews()}
+      </GuardedRoute>
+      <GuardedRoute path="/adminpage">
+      <AdminPageIndex token={sessionToken}/>
+      </GuardedRoute>
+      <GuardedRoute path="/banner">
       <Banner/>
+      </GuardedRoute>
+      </Switch>
+      </GuardProvider>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
-
 export default App;

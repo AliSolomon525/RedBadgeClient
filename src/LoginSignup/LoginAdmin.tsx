@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Banner from "../Components/Banner";
 
 export interface LoginAdminProps {
   updateToken: any;
@@ -47,7 +48,7 @@ class LoginAdmin extends React.Component<LoginAdminProps, LoginAdminState> {
       .then((response) => response.json())
       .then((data: LoginAdminResponse) => {
         console.log(data);
-        this.props.updateToken(data.sessionToken);
+        this.props.updateToken(data.sessionToken, data.isAdmin);
         this.setState({
           username: "",
           password: "",
@@ -120,6 +121,7 @@ export interface LoginAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+  isAdmin: string;
 }
 
 export interface Admin {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Endpoints } from "../Components/Endpoints";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import banner3 from "../assets/banner3.jpg";
 
 export interface SignupAdminProps {
   updateToken: any;
@@ -53,7 +54,7 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
       .then((response) => response.json())
       .then((data: SignupAdminResponse) => {
         console.log(data);
-        this.props.updateToken(data.sessionToken);
+        this.props.updateToken(data.sessionToken, data.isAdmin);
         this.setState({
           firstName: "",
           lastName: "",
@@ -74,7 +75,8 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
 
   render() {
     return (
-      <div className="wrapper">
+      <div>
+      <div className="wrapper2">
         <div className="form-wrapper">
           {/* <h2 style={{ textAlign: "center" }}>Sign Up Admin</h2> */}
           <form onSubmit={this.handleSubmit}>
@@ -131,6 +133,8 @@ class SignupAdmin extends React.Component<SignupAdminProps, SignupAdminState> {
           </form>
         </div>
       </div>
+      <div><img src={banner3} alt="book on table" style={{ width: "100%", height: "80%", paddingTop: "5px", justifyContent: "center" }} /></div>
+      </div>
     );
   }
 }
@@ -150,6 +154,7 @@ export interface SignupAdminResponse {
   username: Username;
   message: string;
   sessionToken: string;
+  isAdmin: boolean;
 }
 
 export interface Admin {
