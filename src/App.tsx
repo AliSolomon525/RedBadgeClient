@@ -83,7 +83,7 @@ console.log(token);
       </GuardProvider>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;

@@ -1,5 +1,5 @@
 //map through all of the Book Lists and display them in rows
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -49,7 +49,6 @@ class BookListTable extends React.Component<BookListTableProps, BookListTableSta
          };
     }
 showBookCards = (row:any)=>{console.log(row); this.setState({booklistId: row.id})}
-
 
     //method to delete books lists from table button
     deleteBookList(id:number){
@@ -105,8 +104,8 @@ showBookCards = (row:any)=>{console.log(row); this.setState({booklistId: row.id}
     <div className="wrapper4">
     <BookIndex token={this.props.token} booklistId={this.state.booklistId} />    
     </div>
-    <div className="about-footer">&copy; BookWyrm BookClub 2020</div>
-            </div>
+    <div className="about-footer">&copy; BookWyrm BookClub 2020</div> 
+    </div>
 
          )
     }

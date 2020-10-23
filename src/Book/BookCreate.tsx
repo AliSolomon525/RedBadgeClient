@@ -104,15 +104,10 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
     render() { 
         return ( 
           <div>
-          <div className="container4">
-
-          <Button style={{marginTop: "8px", backgroundColor:"#ffe8d6"}} variant="outlined" onClick={this.props.onCreate}>
+       {this.props.booklistId != 0 && <Button variant="outlined" color="primary" onClick={this.props.onCreate}  >
             Add a Book
-          </Button>
-
-          </div>
-          <div className="card">
-          <Dialog className="card" open={this.props.openDialog} >
+          </Button>}
+          <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Add a Book</DialogTitle>
             <DialogContent>
               {/* <DialogContentText>
@@ -151,8 +146,6 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
             </DialogActions>
           </Dialog>
           </div>
-          
-        </div>
         )}
 }
 

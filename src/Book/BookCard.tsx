@@ -44,7 +44,6 @@ export interface BookCardState {
 }
  
 class BookCard extends React.Component<BookCardProps, BookCardState> {
-    cards: any;
     constructor(props: BookCardProps) {
         super(props);
         this.state = {            
