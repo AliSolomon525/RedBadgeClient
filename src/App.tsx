@@ -51,9 +51,6 @@ console.log(token);
     if (sessionToken === localStorage.getItem("token")) {
       if (isAdmin === "true") {
         return <AdminPageIndex token={sessionToken}/>
-      } else {
-        return <BookListIndex token={sessionToken} />
-      }
     } else {
         return (<div>
         <Auth token={sessionToken} updateToken={updateToken} />
