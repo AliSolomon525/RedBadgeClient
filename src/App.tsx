@@ -10,7 +10,7 @@ import LoginUser from "./LoginSignup/LoginUser";
 import LoginAdmin from "./LoginSignup/LoginAdmin";
 import BookListIndex from "./BookLists/BookListIndex";
 import BookIndex from "./Book/BookIndex";
-import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, Redirect } from "react-router-dom";
 import About from "./Components/About";
 import BookClub from "./Components/BookClub";
 import AdminPage from "./LoginSignup/AdminPage";
@@ -66,10 +66,15 @@ console.log(token);
         <Nav clickLogout={clearToken}/>
       </div>
       <Switch>
+        <GuardedRoute path="/adminsignup">
+         {sessionToken ? <Redirect to="/adminpage" /> : <SignupAdmin updateToken={updateToken} />} </GuardedRoute>
         <GuardedRoute path="/about"><About /></GuardedRoute>
         <GuardedRoute path="/bookclub"><BookClub/></GuardedRoute>
       <GuardedRoute path="/">
       {protectedViews()}
+      </GuardedRoute>
+      <GuardedRoute path="/adminpage">
+      <AdminPageIndex token={sessionToken}/>
       </GuardedRoute>
       <GuardedRoute path="/banner">
       <Banner/>

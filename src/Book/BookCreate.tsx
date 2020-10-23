@@ -104,7 +104,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
     render() { 
         return ( 
           <div>
-       {this.props.booklistId != 0 && <Button variant="outlined" onClick={this.props.onCreate}  >
+       {this.props.booklistId != 0 && <Button variant="outlined" onClick={this.props.onCreate} style={{backgroundColor:"#ffe8d6"}} >
             Add a Book
           </Button>}
           <Dialog open={this.props.openDialog} aria-labelledby="form-dialog-title">
@@ -121,6 +121,7 @@ class BookCreate extends React.Component<BookCreateProps, BookCreateState> {
                 onChange={(e) => this.setState({ title: e.target.value })}
               />
               <TextField
+              style={{fontSize: "15px"}}
                 autoFocus
                 margin="dense"
                 label="Author"
