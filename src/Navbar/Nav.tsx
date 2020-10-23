@@ -1,105 +1,111 @@
-import React from 'react';
-// import AppBar from '@material-ui/core/AppBar';
-// import { makeStyles, Theme } from '@material-ui/core/styles';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-// import TabPanel from '@material-ui/lab/TabPanel';
+import React from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
+const useStyles = (theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+    color: "A5A58D",
+    minHeight: 10,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    color: "#fffdfb",
+    font: "Lucida Sans Unicode",
+  },
+});
 
-// export interface NavProps {
-//   children?: React.ReactNode;
-//   index: any;
-//   value: any;
-//  }
+export interface NavProps {
+  username?: string;
+  className?: string;
+  color?: any;
+  classes?: any;
+  clickLogout?: any;
+}
 
-// export interface NavState {
+export interface NavState {
+  username: string;
+}
 
+class Nav extends React.Component<NavProps, NavState> {
+  constructor(props: NavProps) {
+    super(props);
+    this.state = { username: "" };
+  }
 
-// }
+  handleChange = (event: { target: { name: string; value: string } }) => {
+    this.setState({ username: event.target.value });
+  };
 
-// function TabPanel(props: NavProps) {
-//   const { children, value, index, ...other } = props;
+  // showSignup = () => {
+  //   if (this.state.open) {
+  //     this.state.setOpen(false);
+  //   } else {
+  //     this.state.setOpen(true);
+  //   }
+  // };
 
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`simple-tabpanel-${index}`}
-//       aria-labelledby={`simple-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box p={3}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
+  render() {
+    const { classes }: any = this.props;
+    return (
+      <div style={{ paddingTop: 56, paddingBottom: 10 }}>
+        <AppBar
+          style={{
+            backgroundColor: "#a5a58d",
+            position: "fixed",
+          }}
+        >
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              BookWyrm BookClub
+            </Typography>
 
-// function a11yProps(index: any) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }
+           <Link to="/banner"
+           style={{
+            textDecoration: "none",
+            color: "black",
+            textTransform: "uppercase",
+            fontSize: "15px",
+            paddingRight: "10px",
+          }}>Home</Link>
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     backgroundColor: theme.palette.background.paper,
-//   },
-// }));
+            <Link to="/about"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              textTransform: "uppercase",
+              fontSize: "15px",
+              paddingRight: "5px",
+            }}>About Us</Link>
 
-// function SimpleTabs() {
-//   const [value, setValue] = React.useState(0);
+            <Link to="/bookclub"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              textTransform: "uppercase",
+              fontSize: "15px",
+              padding: "4px",
+            }}>Book Clubs</Link>
 
-//   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-//     setValue(newValue);
-//   }
+            <Button onClick={this.props.clickLogout} style={{
+              textDecoration: "none",
+              color: "white",
+              textTransform: "uppercase",
+              fontSize: "14px",
+            }}>Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
 
-// class Nav extends React.Component<NavState, NavProps> {
-//   constructor(props: NavProps) {
-//     super(props);
-//     //define your state here:
-//     this.state = {
-//       index: 0, 
-//       value: ,
-
-//     };
-    
-//   }
-
-  //create a method for handle change
-  // change the state to the new value
-//   handleChange(e) {
-//     this.setState({})
-//   }
-
-//   render() { 
-//     return ( 
-//       <div className="appbar">
-//       <AppBar position="static">
-//         <Tabs value={this.value} onChange={this.handleChange}>
-//           <Tab label="Item One" {...a11yProps(0)}/>
-//           <Tab label="Item Two" {...a11yProps(1)} />
-//           <Tab label="Item Three" {...a11yProps(2)} />
-//         </Tabs>
-//       </AppBar>
-//       <TabPanel value={this.value} index={0}>
-//         Item One
-//       </TabPanel>
-//       <TabPanel value={this.value} index={1}>
-//         Item Two
-//       </TabPanel>
-//       <TabPanel value={this.value} index={2}>
-//         Item Three
-//       </TabPanel>
-//     </div>
-//      );
-//   }
-// };
- 
-// export default Nav;
+export default withStyles(useStyles)(Nav);
